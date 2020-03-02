@@ -1,7 +1,7 @@
 Table users as U {
   email varchar [pk] // auto-increment
   name varchar
-  password int
+  password varchar
 }
 
 Table group as G {
@@ -19,8 +19,8 @@ Table chores {
  
 Table todos {
   id int [pk]
-  user user
-  chores chores
+  user varchar
+  chores varchar
   from datetime
   to datetime
   group_id int
