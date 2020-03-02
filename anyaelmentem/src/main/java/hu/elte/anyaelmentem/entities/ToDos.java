@@ -5,16 +5,16 @@
  */
 package hu.elte.anyaelmentem.entities;
 
-import static java.lang.ProcessBuilder.Redirect.from;
 import java.util.Date;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Id;
-import org.springframework.security.core.userdetails.User;
 
 /**
  *
  * @author stefa
  */
+@Entity
 public class ToDos {
     @Id
             

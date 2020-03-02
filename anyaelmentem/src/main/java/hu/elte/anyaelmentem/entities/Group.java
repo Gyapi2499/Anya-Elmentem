@@ -5,10 +5,17 @@
  */
 package hu.elte.anyaelmentem.entities;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  *
  * @author stefa
  */
+@Entity
 public class Group {
-    
+    @Id
+    @Column(nullable = false)
+    private int id;
 }
