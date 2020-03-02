@@ -17,6 +17,8 @@ import javax.persistence.Id;
 @Entity
 public class ToDos {
     @Id
+    @Column(nullable = false)
+    private int id;
             
     @Column(nullable = false)
     private Users user;
