@@ -1,0 +1,31 @@
+Table users as U {
+  email varchar [pk] // auto-increment
+  name varchar
+  password int
+}
+
+Table group as G {
+  id int [pk]
+}
+
+Table USR_GRP {
+  usr_id int [ref: > U.email]
+  grp_id int [ref: > G.id]// inline relationship (many-to-one)
+}
+
+Table chores {
+  name varchar [pk]
+ }
+ 
+Table todos {
+  id int [pk]
+  user user
+  chores chores
+  from datetime
+  to datetime
+  group_id int
+ }
+ 
+ Ref: chores.name > todos.chores
+ Ref: U.email > todos.user
+ Ref: G.id > todos.group_id
