@@ -1,8 +1,10 @@
 package hu.elte.anyaelmentem.entities;
 
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,15 +15,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Users {
-    @Id
 
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Id
     private String email;
 
     @Column(nullable = false)
     private String password;
 
+    @ManyToMany
+    private List<Group> groups;
 }

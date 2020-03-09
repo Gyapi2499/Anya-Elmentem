@@ -24,6 +24,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ToDos {
     @Id
+    @Column(nullable = false)
+    private int id;
             
     @Column(nullable = false)
     private Users user;
