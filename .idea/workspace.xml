@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a9db7172-0084-44e4-b28b-3d544fd2c3b1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/anyaelmentem/src/main/java/hu/elte/anyaelmentem/entities/Chores.java" beforeDir="false" afterPath="$PROJECT_DIR$/anyaelmentem/src/main/java/hu/elte/anyaelmentem/entities/Chores.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/anyaelmentem/src/main/java/hu/elte/anyaelmentem/entities/Group.java" beforeDir="false" afterPath="$PROJECT_DIR$/anyaelmentem/src/main/java/hu/elte/anyaelmentem/entities/Group.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/anyaelmentem/src/main/java/hu/elte/anyaelmentem/entities/ToDos.java" beforeDir="false" afterPath="$PROJECT_DIR$/anyaelmentem/src/main/java/hu/elte/anyaelmentem/entities/ToDos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/anyaelmentem/src/main/java/hu/elte/anyaelmentem/entities/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/anyaelmentem/src/main/java/hu/elte/anyaelmentem/entities/Users.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/anyaelmentem/target/classes/.netbeans_automatic_build" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/anyaelmentem/target/test-classes/.netbeans_automatic_build" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/anyaelmentem/target/classes/hu/elte/anyaelmentem/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/anyaelmentem/target/classes/hu/elte/anyaelmentem/App.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/anyaelmentem/target/classes/hu/elte/anyaelmentem/entities/Chores.class" beforeDir="false" afterPath="$PROJECT_DIR$/anyaelmentem/target/classes/hu/elte/anyaelmentem/entities/Chores.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/anyaelmentem/target/classes/hu/elte/anyaelmentem/entities/Group.class" beforeDir="false" afterPath="$PROJECT_DIR$/anyaelmentem/target/classes/hu/elte/anyaelmentem/entities/Group.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/anyaelmentem/target/classes/hu/elte/anyaelmentem/entities/ToDos.class" beforeDir="false" afterPath="$PROJECT_DIR$/anyaelmentem/target/classes/hu/elte/anyaelmentem/entities/ToDos.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/anyaelmentem/target/classes/hu/elte/anyaelmentem/entities/Users.class" beforeDir="false" afterPath="$PROJECT_DIR$/anyaelmentem/target/classes/hu/elte/anyaelmentem/entities/Users.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,8 +20,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/anyaelmentem/src/main/java/hu/elte/anyaelmentem/entities/Users.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="32" selection-start-line="8" selection-start-column="32" selection-end-line="8" selection-end-column="32" />
+            <state relative-caret-position="170">
+              <caret line="10" column="32" selection-start-line="10" selection-start-column="32" selection-end-line="10" selection-end-column="32" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -67,8 +67,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/anyaelmentem/src/main/java/hu/elte/anyaelmentem/entities/Group.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="13" column="32" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="32" />
+            <state relative-caret-position="272">
+              <caret line="16" column="32" selection-start-line="16" selection-start-column="32" selection-end-line="16" selection-end-column="32" />
               <folding>
                 <element signature="e#0#438#0" expanded="true" />
                 <element signature="imports" expanded="true" />
@@ -105,9 +105,9 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1063" />
-    <option name="width" value="864" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="952" />
+    <option name="width" value="977" />
     <option name="height" value="1038" />
   </component>
   <component name="ProjectView">
@@ -235,7 +235,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
     <layout>
       <window_info id="Image Layers" />
       <window_info id="Designer" />
@@ -321,8 +321,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/anyaelmentem/src/main/java/hu/elte/anyaelmentem/entities/Group.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="32" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="32" />
+        <state relative-caret-position="272">
+          <caret line="16" column="32" selection-start-line="16" selection-start-column="32" selection-end-line="16" selection-end-column="32" />
           <folding>
             <element signature="e#0#438#0" expanded="true" />
             <element signature="imports" expanded="true" />
@@ -343,8 +343,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/anyaelmentem/src/main/java/hu/elte/anyaelmentem/entities/Users.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="32" selection-start-line="8" selection-start-column="32" selection-end-line="8" selection-end-column="32" />
+        <state relative-caret-position="170">
+          <caret line="10" column="32" selection-start-line="10" selection-start-column="32" selection-end-line="10" selection-end-column="32" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
