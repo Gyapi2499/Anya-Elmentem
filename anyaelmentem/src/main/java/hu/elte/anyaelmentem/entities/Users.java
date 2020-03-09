@@ -1,5 +1,6 @@
 package hu.elte.anyaelmentem.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,6 +33,7 @@ public class Users {
     private Role role;
 
     @ManyToMany
+    @JsonIgnore
     private List<Group> groups;
     
     public enum Role{

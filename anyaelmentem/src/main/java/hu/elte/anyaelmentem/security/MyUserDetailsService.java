@@ -29,6 +29,9 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Autowired
     private UserRepository usersRepository;
+    
+    @Autowired
+    private AuthenticatedUser authenticatedUser;
 
     @Override
     @Transactional(readOnly = true)
@@ -38,7 +41,7 @@ public class MyUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException(email);
         }
         Users user = oUser.get();
-        //authenticatedUser.setUser(user);
+        authenticatedUser.setUser(user);
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole().toString()));
 
