@@ -9,11 +9,18 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 /**
  *
  * @author stefa
  */
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Chores {
     @Id
     @Column(nullable = false)
