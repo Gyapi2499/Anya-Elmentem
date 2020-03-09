@@ -11,7 +11,6 @@ import javax.persistence.ManyToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.context.annotation.Role;
 
 @Entity
 @Data
@@ -34,4 +33,8 @@ public class Users {
 
     @ManyToMany
     private List<Group> groups;
+    
+    public enum Role{
+        ADMIN,USER
+    }
 }
