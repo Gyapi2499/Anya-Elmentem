@@ -9,6 +9,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,10 +28,11 @@ public class ToDos {
     @Column(nullable = false)
     private int id;
             
-    @Column(nullable = false)
+    @ManyToOne
     private Users user;
     
-    @Column(nullable = false)
+    
+    @ManyToOne
     private Chores chores;
      
     @Column(nullable = false)

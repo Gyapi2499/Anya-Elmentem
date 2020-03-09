@@ -30,6 +30,5 @@ public class Group {
     private int id;
     
     @ManyToMany
-    @JoinTable(name = "USR_GRP")
     private List<Users> users;
 }
