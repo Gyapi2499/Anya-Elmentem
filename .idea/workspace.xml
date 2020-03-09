@@ -3,11 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="a9db7172-0084-44e4-b28b-3d544fd2c3b1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/anyaelmentem/target/classes/hu/elte/anyaelmentem/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/anyaelmentem/target/classes/hu/elte/anyaelmentem/App.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/anyaelmentem/target/classes/hu/elte/anyaelmentem/entities/Chores.class" beforeDir="false" afterPath="$PROJECT_DIR$/anyaelmentem/target/classes/hu/elte/anyaelmentem/entities/Chores.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/anyaelmentem/target/classes/hu/elte/anyaelmentem/entities/Group.class" beforeDir="false" afterPath="$PROJECT_DIR$/anyaelmentem/target/classes/hu/elte/anyaelmentem/entities/Group.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/anyaelmentem/target/classes/hu/elte/anyaelmentem/entities/ToDos.class" beforeDir="false" afterPath="$PROJECT_DIR$/anyaelmentem/target/classes/hu/elte/anyaelmentem/entities/ToDos.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/anyaelmentem/target/classes/hu/elte/anyaelmentem/entities/Users.class" beforeDir="false" afterPath="$PROJECT_DIR$/anyaelmentem/target/classes/hu/elte/anyaelmentem/entities/Users.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/anyaelmentem/src/main/java/hu/elte/anyaelmentem/controllers/ToDoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/anyaelmentem/src/main/java/hu/elte/anyaelmentem/controllers/ToDoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/anyaelmentem/src/main/java/hu/elte/anyaelmentem/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/anyaelmentem/src/main/java/hu/elte/anyaelmentem/controllers/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/anyaelmentem/src/main/resources/import.sql" beforeDir="false" afterPath="$PROJECT_DIR$/anyaelmentem/src/main/resources/import.sql" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -106,8 +104,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="952" />
-    <option name="width" value="977" />
+    <option name="x" value="382" />
+    <option name="y" value="87" />
+    <option name="width" value="1390" />
     <option name="height" value="1038" />
   </component>
   <component name="ProjectView">
@@ -236,6 +235,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
+    <editor active="true" />
     <layout>
       <window_info id="Image Layers" />
       <window_info id="Designer" />
