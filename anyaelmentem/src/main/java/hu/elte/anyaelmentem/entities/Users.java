@@ -2,12 +2,15 @@ package hu.elte.anyaelmentem.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -35,6 +38,11 @@ public class Users {
     @ManyToMany
     @JsonIgnore
     private List<Group> groups;
+    
+    
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonIgnore
+    private List<ToDos> toDos;
     
     public enum Role{
         ADMIN,USER

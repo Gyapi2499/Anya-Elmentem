@@ -35,4 +35,7 @@ public class Group {
     
     @ManyToMany(mappedBy = "groups")
     private List<Users> users;
+    
+    @ManyToMany
+    private List<Users> admins;
 }
