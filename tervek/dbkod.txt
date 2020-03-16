@@ -24,6 +24,7 @@ Table todos {
   from datetime
   to datetime
   group_id int
+  ready boolean
  }
  
  Ref: chores.name > todos.chores
