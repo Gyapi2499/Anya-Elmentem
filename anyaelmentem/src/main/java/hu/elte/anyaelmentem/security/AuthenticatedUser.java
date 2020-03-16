@@ -1,6 +1,6 @@
 package hu.elte.anyaelmentem.security;
 
-import hu.elte.anyaelmentem.entities.Users;
+import hu.elte.anyaelmentem.entities.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,5 +14,5 @@ import org.springframework.web.context.annotation.RequestScope;
 @AllArgsConstructor
 
 public class AuthenticatedUser {
-    private Users user;
+    private User user;
 }

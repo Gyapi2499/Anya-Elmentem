@@ -5,7 +5,7 @@
  */
 package hu.elte.anyaelmentem.repositories;
 
-import hu.elte.anyaelmentem.entities.Users;
+import hu.elte.anyaelmentem.entities.User;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;
@@ -14,8 +14,8 @@ import org.springframework.data.repository.CrudRepository;
  *
  * @author Máté
  */
-public interface UserRepository extends CrudRepository<Users, String>{
-    Optional<Users> findByEmail(String email);
-    List<Users> findAll();    
+public interface UserRepository extends CrudRepository<User, String>{
+    Optional<User> findByEmail(String email);
+    List<User> findAll();    
 }
 

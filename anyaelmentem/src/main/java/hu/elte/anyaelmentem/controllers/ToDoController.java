@@ -5,8 +5,8 @@
  */
 package hu.elte.anyaelmentem.controllers;
 
-import hu.elte.anyaelmentem.entities.ToDos;
-import hu.elte.anyaelmentem.entities.Users;
+import hu.elte.anyaelmentem.entities.ToDo;
+import hu.elte.anyaelmentem.entities.User;
 import hu.elte.anyaelmentem.repositories.GroupRepository;
 import hu.elte.anyaelmentem.repositories.ToDoRepository;
 import hu.elte.anyaelmentem.repositories.UserRepository;
@@ -45,15 +45,15 @@ public class ToDoController {
     private UserRepository userRepository;    
     
     @GetMapping("/myToDo")
-    public ResponseEntity<List<ToDos>> getMyToDos(){
+    public ResponseEntity<List<ToDo>> getMyToDos(){
         return ResponseEntity.ok(toDoRepository.findAllByUser(authenticatedUser.getUser()).get());
     }
     
     @GetMapping("/groupToDo/{id}")
-    public ResponseEntity <List<List<ToDos>>> getGroupToDos(@PathVariable int id){
-        List<Users> users = groupRepository.findById(id).get().getUsers();        
-        List<List<ToDos>> GTDList = new ArrayList<List<ToDos>>();
-        for(Users user : users){
+    public ResponseEntity <List<List<ToDo>>> getGroupToDos(@PathVariable int id){
+        List<User> users = groupRepository.findById(id).get().getUsers();        
+        List<List<ToDo>> GTDList = new ArrayList<List<ToDo>>();
+        for(User user : users){
            GTDList.add(user.getToDos());
         }
         return ResponseEntity.ok(GTDList);
@@ -61,15 +61,15 @@ public class ToDoController {
     
     
     @PostMapping("/didIt")
-    public ResponseEntity<List<List<ToDos>>> didIt(int id,List<ToDos> tdList){
-        if(authenticatedUser.getUser().getRole()== Users.Role.ADMIN || groupRepository.findById(id).get().getAdmins().contains(authenticatedUser.getUser())) {
-            List<List<ToDos>> listToDo=new ArrayList();
-            for(ToDos t : tdList){
+    public ResponseEntity<List<List<ToDo>>> didIt(int id,List<ToDo> tdList){
+        if(authenticatedUser.getUser().getRole()== User.Role.ADMIN || groupRepository.findById(id).get().getAdmins().contains(authenticatedUser.getUser())) {
+            List<List<ToDo>> listToDo=new ArrayList();
+            for(ToDo t : tdList){
                 t.getUser().getToDos().add(t);
                 userRepository.save(t.getUser());
             }
             toDoRepository.saveAll(tdList);           
-            for(Users user : groupRepository.findById(id).get().getUsers()){
+            for(User user : groupRepository.findById(id).get().getUsers()){
                 listToDo.add(user.getToDos());
             }
             return ResponseEntity.ok(listToDo);
@@ -79,8 +79,8 @@ public class ToDoController {
             
     
     @PostMapping("/myDay")
-    public ResponseEntity<List<ToDos>> myDay(@RequestBody List<ToDos> todos){
-        for(ToDos td : todos){
+    public ResponseEntity<List<ToDo>> myDay(@RequestBody List<ToDo> todos){
+        for(ToDo td : todos){
            authenticatedUser.getUser().getToDos().add(td);           
         }
         toDoRepository.saveAll(todos);

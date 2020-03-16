@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @RestController
 @RequestMapping("/chores")
-public class ChoresController {
+public class ChoreController {
 
     
 

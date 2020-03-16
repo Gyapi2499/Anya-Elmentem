@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Chores {
+public class Chore {
     @Id
     @Column(nullable = false)
     private String name;

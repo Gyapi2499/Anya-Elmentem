@@ -5,7 +5,7 @@
  */
 package hu.elte.anyaelmentem.security;
 
-import hu.elte.anyaelmentem.entities.Users;
+import hu.elte.anyaelmentem.entities.User;
 import hu.elte.anyaelmentem.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -36,11 +36,11 @@ public class MyUserDetailsService implements UserDetailsService {
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<Users> oUser = usersRepository.findByEmail(email);
+        Optional<User> oUser = usersRepository.findByEmail(email);
         if (!oUser.isPresent()) {
             throw new UsernameNotFoundException(email);
         }
-        Users user = oUser.get();
+        User user = oUser.get();
         authenticatedUser.setUser(user);
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole().toString()));

@@ -34,8 +34,8 @@ public class Group {
     private int id;
     
     @ManyToMany(mappedBy = "groups")
-    private List<Users> users;
+    private List<User> users;
     
     @ManyToMany
-    private List<Users> admins;
+    private List<User> admins;
 }

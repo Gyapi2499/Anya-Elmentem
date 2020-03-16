@@ -27,7 +27,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ToDos{
+public class ToDo{
     
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -36,7 +36,7 @@ public class ToDos{
             
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user")
-    private Users user;
+    private User user;
     
     @JoinColumn
     private String chores;

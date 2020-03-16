@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Users {
+public class User {
 
     @Column(nullable = false)
     private String name;
@@ -43,7 +43,7 @@ public class Users {
     
     @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, mappedBy = "user")
     @JsonIgnore
-    private List<ToDos> toDos;
+    private List<ToDo> toDos;
     
     public enum Role{
         ADMIN,USER

@@ -6,7 +6,7 @@
 package hu.elte.anyaelmentem.controllers;
 
 import hu.elte.anyaelmentem.entities.Group;
-import hu.elte.anyaelmentem.entities.Users;
+import hu.elte.anyaelmentem.entities.User;
 import hu.elte.anyaelmentem.repositories.GroupRepository;
 import hu.elte.anyaelmentem.repositories.UserRepository;
 import hu.elte.anyaelmentem.security.AuthenticatedUser;
@@ -40,7 +40,7 @@ public class GroupController {
     * uj csapat 
     */
    @PostMapping("/newGroup")
-   public ResponseEntity<Group> newGroup(List<Users> myMember){
+   public ResponseEntity<Group> newGroup(List<User> myMember){
        Group nGroup= new Group();
        nGroup.setUsers(myMember);
        nGroup.getAdmins().add(authenticatedUser.getUser());
@@ -48,8 +48,8 @@ public class GroupController {
    }
    
    @PostMapping("/addMember")//csapathoz adok hozzá
-   public ResponseEntity<Group> addMember(int id, Users addM){
-       if(authenticatedUser.getUser().getRole()== Users.Role.ADMIN || groupRepository.findById(id).get().getAdmins().contains(authenticatedUser.getUser())) {
+   public ResponseEntity<Group> addMember(int id, User addM){
+       if(authenticatedUser.getUser().getRole()== User.Role.ADMIN || groupRepository.findById(id).get().getAdmins().contains(authenticatedUser.getUser())) {
        Group temp=groupRepository.findById(id).get();
        temp.getUsers().add(addM);
        return ResponseEntity.ok(groupRepository.save(temp));       
@@ -57,10 +57,10 @@ public class GroupController {
 }
    
    @PostMapping("/shareAdmin")
-   public ResponseEntity<Group> shareAdmin(int id, List<Users> user){
-       if(authenticatedUser.getUser().getRole()== Users.Role.ADMIN || groupRepository.findById(id).get().getAdmins().contains(authenticatedUser.getUser())) {
+   public ResponseEntity<Group> shareAdmin(int id, List<User> user){
+       if(authenticatedUser.getUser().getRole()== User.Role.ADMIN || groupRepository.findById(id).get().getAdmins().contains(authenticatedUser.getUser())) {
        Group temp=groupRepository.findById(id).get();
-       for(Users u:user){
+       for(User u:user){
        temp.getUsers().remove(u);
        temp.getAdmins().add(u);
        }
@@ -69,10 +69,10 @@ public class GroupController {
 }
    
     @PostMapping("/takeAdmin")
-    public ResponseEntity<Group> takeAdmin(int id, List<Users> user){
-       if(authenticatedUser.getUser().getRole()== Users.Role.ADMIN || groupRepository.findById(id).get().getAdmins().contains(authenticatedUser.getUser())) {
+    public ResponseEntity<Group> takeAdmin(int id, List<User> user){
+       if(authenticatedUser.getUser().getRole()== User.Role.ADMIN || groupRepository.findById(id).get().getAdmins().contains(authenticatedUser.getUser())) {
        Group temp=groupRepository.findById(id).get();
-       for(Users u:user){
+       for(User u:user){
        temp.getUsers().add(u);
        temp.getAdmins().remove(u);
        }
@@ -82,15 +82,15 @@ public class GroupController {
     
     @DeleteMapping("/deleteGroup/{id}")
     public ResponseEntity<Void> deleteGroup(@PathVariable int id){
-        if(authenticatedUser.getUser().getRole()== Users.Role.ADMIN || groupRepository.findById(id).get().getAdmins().contains(authenticatedUser.getUser())) {
+        if(authenticatedUser.getUser().getRole()== User.Role.ADMIN || groupRepository.findById(id).get().getAdmins().contains(authenticatedUser.getUser())) {
         groupRepository.delete(groupRepository.findById(id).get());
         return ResponseEntity.ok().build();
        } return ResponseEntity.badRequest().build(); 
     }
     
     @PostMapping("/deleteMember")
-    public ResponseEntity<Group> deleteMember(int id, Users deleteM){
-       if(authenticatedUser.getUser().getRole()== Users.Role.ADMIN || groupRepository.findById(id).get().getAdmins().contains(authenticatedUser.getUser())) {
+    public ResponseEntity<Group> deleteMember(int id, User deleteM){
+       if(authenticatedUser.getUser().getRole()== User.Role.ADMIN || groupRepository.findById(id).get().getAdmins().contains(authenticatedUser.getUser())) {
        Group temp=groupRepository.findById(id).get();
        temp.getUsers().remove(deleteM);
        return ResponseEntity.ok(groupRepository.save(temp));     
