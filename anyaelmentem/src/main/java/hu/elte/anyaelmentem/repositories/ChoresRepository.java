@@ -8,9 +8,10 @@ package hu.elte.anyaelmentem.repositories;
 
 import org.springframework.data.repository.CrudRepository;
 import hu.elte.anyaelmentem.entities.Chores;
+import java.util.Optional;
 
 
 public interface ChoresRepository extends CrudRepository<Chores, String> {
-
+    Optional <Chores> findById(String id);
 
 }

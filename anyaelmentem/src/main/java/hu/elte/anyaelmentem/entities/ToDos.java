@@ -46,8 +46,11 @@ public class ToDos{
             
     @Column(nullable=false)
     private LocalDateTime toDate;
-   
+    
     @Column(nullable = false)
     private int groupId;
+    
+    @Column(nullable=false)
+    private Boolean ready;
                    
 }
