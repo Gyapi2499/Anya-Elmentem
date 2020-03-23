@@ -15,11 +15,14 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.util.List;
+import static org.apache.coyote.http11.Constants.a;
 import org.springframework.beans.factory.annotation.Autowired;
+import static org.springframework.http.RequestEntity.post;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -57,6 +60,14 @@ public class ToDoController {
             }
         } 
         return ResponseEntity.ok(weekToDo);       
+    }
+    
+    
+    @PostMapping("/readyOrNot/{id}")
+    public ResponseEntity<ToDo> readyOrNot(@PathVariable int id){
+        ToDo ron = toDoRepository.findById(id).get();
+        ron.setReady(true);
+        return ResponseEntity.ok(toDoRepository.save(ron));
     }
 
 }
