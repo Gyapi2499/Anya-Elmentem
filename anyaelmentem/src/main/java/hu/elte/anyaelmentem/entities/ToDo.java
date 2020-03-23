@@ -34,7 +34,7 @@ public class ToDo{
     @Column
     private int id;
             
-    private String user_id;
+    private String userId;
     
     @JoinColumn
     private String chores;
