@@ -8,10 +8,15 @@ package hu.elte.anyaelmentem.repositories;
 
 import org.springframework.data.repository.CrudRepository;
 import hu.elte.anyaelmentem.entities.Chore;
+import java.util.List;
 import java.util.Optional;
+import org.springframework.data.jpa.repository.Query;
 
 
 public interface ChoreRepository extends CrudRepository<Chore, String> {
     Optional <Chore> findById(String id);
+    
+    @Query(value="SELECT*FROM CHORE", nativeQuery=true)
+    List <Chore> findAll();
 
 }
