@@ -6,10 +6,19 @@
 package hu.elte.anyaelmentem.controllers;
 
 import hu.elte.anyaelmentem.entities.ToDo;
+import hu.elte.anyaelmentem.entities.User;
+import hu.elte.anyaelmentem.entities.Group;
+import hu.elte.anyaelmentem.entities.Chore;
+import hu.elte.anyaelmentem.repositories.ChoreRepository;
 import hu.elte.anyaelmentem.repositories.GroupRepository;
 import hu.elte.anyaelmentem.repositories.ToDoRepository;
 import hu.elte.anyaelmentem.repositories.UserRepository;
 import hu.elte.anyaelmentem.security.AuthenticatedUser;
+import java.text.DateFormat;
+import java.time.DayOfWeek;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoField;
+import java.time.temporal.ChronoUnit;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoField;
@@ -20,6 +29,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import static org.springframework.http.RequestEntity.post;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,6 +54,101 @@ public class ToDoController {
     @Autowired
     private UserRepository userRepository;    
     
+    @Autowired
+    ChoreRepository choreRepository;
+    
+    @PostMapping("/add")
+    public ResponseEntity<Void> add(ToDo todo){
+        Group group = groupRepository.findById(todo.getGroupId()).get();
+        if(authenticatedUser.getUser().getRole()==User.Role.ADMIN 
+           || group.getAdmins().contains(authenticatedUser.getUser())){
+            if(todo.getFromDate()==null && todo.getToDate()==null){
+                if(todo.getUserId()==null){
+                    int min=168;
+                    User minUser = new User();
+                    authenticatedUser.getUser().getEmail();
+                    LocalDateTime now = LocalDateTime.now();
+                    DayOfWeek day = now.getDayOfWeek();
+                    long dayNum = day.getLong(ChronoField.DAY_OF_WEEK);
+                    LocalDateTime monday = now.withDayOfYear(now.getDayOfYear()-(int)dayNum-1).withHour(8).withMinute(0).withSecond(0);
+                    for(User user: group.getUsers()){
+                        int time = 0;
+                        for(ToDo t:toDoRepository.findAllByUserId(user.getEmail()).get()){
+                            if(t.getFromDate().isAfter(monday.withHour(0)) && t.getToDate().isBefore(monday.withHour(0).plusDays(7))){
+                                time+=(t.getFromDate().until(t.getToDate(), ChronoUnit.HOURS));
+                            }
+                            else if(t.getFromDate().isBefore(monday.withHour(0)) && t.getToDate().isAfter(monday.withHour(0))){
+                                time+=(monday.withHour(0).until(t.getToDate(), ChronoUnit.HOURS));
+                            }
+                            else if(t.getFromDate().isBefore(monday.withHour(0).plusDays(7)) && t.getToDate().isAfter(monday.withHour(0).plusDays(7))){
+                                time+=(t.getFromDate().until(monday.withHour(0).plusDays(7), ChronoUnit.HOURS));
+                            }
+                        }
+                        if(time<min){
+                            min = time;
+                            minUser=user;
+                        }
+                    }
+                    if(minUser.getEmail()==null){
+                        return ResponseEntity.badRequest().build();
+                    }
+                    todo.setUserId(minUser.getEmail());
+                    boolean right = true;
+                    while(right){
+                        for(ToDo t:toDoRepository.findAllByUserId(minUser.getEmail()).get()){
+                            if((monday.isAfter(t.getFromDate()) && monday.isBefore(t.getToDate()))
+                                    || monday.withHour(monday.getHour()+1).isAfter(t.getFromDate()) && monday.withHour(monday.getHour()+1).isBefore(t.getToDate())){
+                                right=false;
+                                break;
+                            }
+                        }
+                    monday.plusHours(1);
+                    }
+                    if(right){
+                        todo.setFromDate(monday);
+                        todo.setToDate(monday.plusHours(1));
+                        if(!choreRepository.findById(todo.getChores()).isPresent()){
+                            choreRepository.save(new Chore(todo.getChores()));
+                        }
+                        toDoRepository.save(todo);
+                        return ResponseEntity.ok().build();
+                    }
+                    return ResponseEntity.badRequest().build();
+                }
+                    LocalDateTime now = LocalDateTime.now();
+                    DayOfWeek day = now.getDayOfWeek();
+                    long dayNum = day.getLong(ChronoField.DAY_OF_WEEK);
+                    LocalDateTime monday = now.withDayOfYear(now.getDayOfYear()-(int)dayNum-1).withHour(8).withMinute(0).withSecond(0);
+                    boolean right = true;
+                    while(right){
+                        for(ToDo t:toDoRepository.findAllByUserId(todo.getUserId()).get()){
+                            if((monday.isAfter(t.getFromDate()) && monday.isBefore(t.getToDate()))
+                                    || monday.withHour(monday.getHour()+1).isAfter(t.getFromDate()) && monday.withHour(monday.getHour()+1).isBefore(t.getToDate())){
+                                right=false;
+                                break;
+                            }
+                        }
+                    monday.plusHours(1);
+                    }
+                    if(right){
+                        todo.setFromDate(monday);
+                        todo.setToDate(monday.plusHours(1));
+                        if(!choreRepository.findById(todo.getChores()).isPresent()){
+                            choreRepository.save(new Chore(todo.getChores()));
+                        }
+                        toDoRepository.save(todo);
+                        return ResponseEntity.ok().build();
+                    }
+                    return ResponseEntity.badRequest().build();
+            }
+            if(!choreRepository.findById(todo.getChores()).isPresent()){
+                choreRepository.save(new Chore(todo.getChores()));
+            }
+            toDoRepository.save(todo);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.badRequest().build();
+    }
     @GetMapping("/getWeek/{userId}")
     public ResponseEntity<List<ToDo>> getWeek(@PathVariable String userId){
         LocalDateTime now = LocalDateTime.now();
@@ -62,12 +167,23 @@ public class ToDoController {
         return ResponseEntity.ok(weekToDo);       
     }
     
+
     
     @PostMapping("/readyOrNot/{id}")
     public ResponseEntity<ToDo> readyOrNot(@PathVariable int id){
         ToDo ron = toDoRepository.findById(id).get();
         ron.setReady(true);
         return ResponseEntity.ok(toDoRepository.save(ron));
+    }
+
+
+   /**
+    * Todo törlés metódus
+    */
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> delete(@PathVariable int id){
+        toDoRepository.deleteById(id);
+        return ResponseEntity.ok().build();
     }
 
 }
