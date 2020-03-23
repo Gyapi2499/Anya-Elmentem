@@ -34,9 +34,7 @@ public class ToDo{
     @Column
     private int id;
             
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user")
-    private User user;
+    private String user_id;
     
     @JoinColumn
     private String chores;

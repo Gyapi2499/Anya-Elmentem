@@ -41,10 +41,6 @@ public class User {
     private List<Group> groups;
     
     
-    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, mappedBy = "user")
-    @JsonIgnore
-    private List<ToDo> toDos;
-    
     public enum Role{
         ADMIN,USER
     }
