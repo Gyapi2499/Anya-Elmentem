@@ -98,8 +98,8 @@ public class GroupController {
        } return ResponseEntity.badRequest().build(); 
     }
     
-    @GetMapping("/getMemberList")
-    public ResponseEntity<List<User>> getMemberList(int id){
+    @GetMapping("/getMemberList/{id}")
+    public ResponseEntity<List<User>> getMemberList(@PathVariable int id){
         List<User> users = groupRepository.findById(id).get().getUsers();
         List<User> admins = groupRepository.findById(id).get().getAdmins();
         for(User u:admins){
@@ -108,6 +108,7 @@ public class GroupController {
         return ResponseEntity.ok(users);
         
     }
+    
     
     
 }
