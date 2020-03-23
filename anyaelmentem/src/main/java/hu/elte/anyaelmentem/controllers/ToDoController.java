@@ -44,48 +44,5 @@ public class ToDoController {
     @Autowired
     private UserRepository userRepository;    
     
-    @GetMapping("/myToDo")
-    public ResponseEntity<List<ToDo>> getMyToDos(){
-        return ResponseEntity.ok(toDoRepository.findAllByUser(authenticatedUser.getUser()).get());
-    }
-    
-    @GetMapping("/groupToDo/{id}")
-    public ResponseEntity <List<List<ToDo>>> getGroupToDos(@PathVariable int id){
-        List<User> users = groupRepository.findById(id).get().getUsers();        
-        List<List<ToDo>> GTDList = new ArrayList<List<ToDo>>();
-        for(User user : users){
-           GTDList.add(user.getToDos());
-        }
-        return ResponseEntity.ok(GTDList);
-    }
-    
-    
-    @PostMapping("/didIt")
-    public ResponseEntity<List<List<ToDo>>> didIt(int id,List<ToDo> tdList){
-        if(authenticatedUser.getUser().getRole()== User.Role.ADMIN || groupRepository.findById(id).get().getAdmins().contains(authenticatedUser.getUser())) {
-            List<List<ToDo>> listToDo=new ArrayList();
-            for(ToDo t : tdList){
-                t.getUser().getToDos().add(t);
-                userRepository.save(t.getUser());
-            }
-            toDoRepository.saveAll(tdList);           
-            for(User user : groupRepository.findById(id).get().getUsers()){
-                listToDo.add(user.getToDos());
-            }
-            return ResponseEntity.ok(listToDo);
-        }
-        return ResponseEntity.badRequest().build();         
-    }
-            
-    
-    @PostMapping("/myDay")
-    public ResponseEntity<List<ToDo>> myDay(@RequestBody List<ToDo> todos){
-        for(ToDo td : todos){
-           authenticatedUser.getUser().getToDos().add(td);           
-        }
-        toDoRepository.saveAll(todos);
-        userRepository.save(authenticatedUser.getUser());
-        return ResponseEntity.ok(authenticatedUser.getUser().getToDos());
-        
-    }
+
 }
