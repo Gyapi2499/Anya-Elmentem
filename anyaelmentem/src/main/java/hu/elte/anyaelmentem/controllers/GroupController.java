@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -96,4 +97,17 @@ public class GroupController {
        return ResponseEntity.ok(groupRepository.save(temp));     
        } return ResponseEntity.badRequest().build(); 
     }
+    
+    @GetMapping("/getMemberList")
+    public ResponseEntity<List<User>> getMemberList(int id){
+        List<User> users = groupRepository.findById(id).get().getUsers();
+        List<User> admins = groupRepository.findById(id).get().getAdmins();
+        for(User u:admins){
+            users.add(u);
+        }       
+        return ResponseEntity.ok(users);
+        
+    }
+    
+    
 }
