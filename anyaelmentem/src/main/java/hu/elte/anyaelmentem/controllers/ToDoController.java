@@ -93,8 +93,9 @@ public class ToDoController {
                         return ResponseEntity.badRequest().build();
                     }
                     todo.setUserId(minUser.getEmail());
-                    boolean right = true;
-                    while(right){
+                    boolean right = false;
+                    while(!right){
+                        right=true;
                         for(ToDo t:toDoRepository.findAllByUserId(minUser.getEmail()).get()){
                             if((monday.isAfter(t.getFromDate()) && monday.isBefore(t.getToDate()))
                                     || monday.withHour(monday.getHour()+1).isAfter(t.getFromDate()) && monday.withHour(monday.getHour()+1).isBefore(t.getToDate())){
