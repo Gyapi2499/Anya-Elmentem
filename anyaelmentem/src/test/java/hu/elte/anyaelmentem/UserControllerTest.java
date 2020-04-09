@@ -20,6 +20,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpHeaders;
@@ -61,6 +62,12 @@ public class UserControllerTest {
     @MockBean
     private BCryptPasswordEncoder passwordEncoder;
     
+    String token ="anya@anya.com:asdasd";
+    String encoded = new String(Base64.getEncoder().encode(token.getBytes()));
+    
+    @Value("${need.test}")
+    private boolean test;
+
     
     @BeforeClass
     void init(){
@@ -69,14 +76,17 @@ public class UserControllerTest {
     
     @BeforeEach
     void auth() throws Exception{
-       String token ="anya@anya.com:asdasd";
-       String encoded = new String(Base64.getEncoder().encode(token.getBytes()));
-        System.out.println(encoded);
-        mockMvc.perform(post("/users/login",new User()).header("Access-Control-Allow-Origin", "*").header("Authorization" , "Basic "+encoded).contentType("application/json")).andExpect(status().is(200));
+       
+        System.out.println(test);
+        mockMvc.perform(post("/users/login").header("Access-Control-Allow-Origin", "*").header("Authorization" , "Basic "+encoded).contentType("application/json"));
     }
     
     @Test
     void whenValidInput_thenReturns200() throws Exception {
-        mockMvc.perform(get("/chores/allChores").contentType("application/json")).andExpect(status().is(200));
-  }
+        if(test){
+            mockMvc.perform(get("/chores/allChores").contentType("application/json")).andExpect(status().is(200));
+        }else{
+            mockMvc.perform(get("/chores/allChores").header("Access-Control-Allow-Origin", "*").header("Authorization" , "Basic "+encoded).contentType("application/json")).andExpect(status().is(401));
+        }
+    }
 }
