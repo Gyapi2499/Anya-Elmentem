@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import hu.elte.anyaelmentem.entities.Chore;
 import hu.elte.anyaelmentem.entities.Group;
 import hu.elte.anyaelmentem.entities.User;
+import hu.elte.anyaelmentem.entities.User.Role;
 import hu.elte.anyaelmentem.repositories.ChoreRepository;
 import hu.elte.anyaelmentem.repositories.GroupRepository;
 import hu.elte.anyaelmentem.repositories.ToDoRepository;
@@ -31,7 +32,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -125,7 +125,6 @@ public class UserControllerTest {
         
         List<Group> glist = new ArrayList();
         glist.add(group);
-        
           u1.setGroups(glist);
           u2.setGroups(glist);
         
@@ -137,6 +136,17 @@ public class UserControllerTest {
         
         
     }
-    
+    @ Test
+    void registerTest() throws Exception{
+        User u1= new User("Bori","bori@bori.hu","pingvin",Role.USER,null); 
+        //mockMvc.perform(post("/users/users/register",u1).contentType("application/json"));
+        mockMvc.perform(post("/users/users/register").content(objectMapper.writeValueAsString(u1)).contentType("application/json"));
+        ArgumentCaptor<User> userCaptor = ArgumentCaptor.forClass(User.class);
+        verify(userRepository, times(1)).save(userCaptor.capture());
+       
+         assertThat(userCaptor.getValue().getName()).isEqualTo("Bori");
+         assertThat(userCaptor.getValue().getEmail()).isEqualTo("bori@bori.hu");
+         assertThat(userCaptor.getValue().getRole()).isEqualTo(Role.USER);
+    }
 
 }
