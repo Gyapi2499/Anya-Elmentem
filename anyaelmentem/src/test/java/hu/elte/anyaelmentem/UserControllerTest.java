@@ -8,13 +8,18 @@ package hu.elte.anyaelmentem;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import hu.elte.anyaelmentem.entities.Chore;
 import hu.elte.anyaelmentem.entities.ToDo;
+import hu.elte.anyaelmentem.entities.Group;
+import hu.elte.anyaelmentem.entities.User;
+import hu.elte.anyaelmentem.entities.User.Role;
 import hu.elte.anyaelmentem.repositories.ChoreRepository;
 import hu.elte.anyaelmentem.repositories.GroupRepository;
 import hu.elte.anyaelmentem.repositories.ToDoRepository;
 import hu.elte.anyaelmentem.repositories.UserRepository;
 import hu.elte.anyaelmentem.security.AuthenticatedUser;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 import static org.assertj.core.api.Java6Assertions.*;
 import org.junit.BeforeClass;
 import org.junit.jupiter.api.BeforeEach;
@@ -49,7 +54,7 @@ public class UserControllerTest {
     ChoreRepository choreRepository;
     
     @MockBean
-    AuthenticatedUser AuthenticatedUser;
+    AuthenticatedUser authenticatedUser;
     
     @MockBean
     GroupRepository groupRepository;
@@ -77,9 +82,7 @@ public class UserControllerTest {
     
     @BeforeEach
     void auth() throws Exception{
-       
-        System.out.println(test);
-        mockMvc.perform(post("/users/login").header("Access-Control-Allow-Origin", "*").header("Authorization" , "Basic "+encoded).contentType("application/json"));
+        //mockMvc.perform(post("/users/login").header("Access-Control-Allow-Origin", "*").header("Authorization" , "Basic "+encoded).contentType("application/json"));
     }
     
     @Test
@@ -109,6 +112,43 @@ public class UserControllerTest {
       ArgumentCaptor<Chore> choreCaptor = ArgumentCaptor.forClass(Chore.class);
       verify(choreRepository, times(1)).save(choreCaptor.capture());
       assertThat(choreCaptor.getValue().getName()).isEqualTo(chore.getName());
+    }
+    
+    @Test
+    void newGroupTest() throws Exception{
+        User u1= new User("bori","bori@bori.hu","asd",User.Role.ADMIN,null);
+        //authenticatedUser.setUser(u1);
+        User u2= new User("bori2","bori2@bori.hu","asd",User.Role.ADMIN,null);
+        List<User> ulist= new ArrayList<>();
+        ulist.add(u1);
+        ulist.add(u2);
+        
+        Group group = new Group(1,new ArrayList<User>(),ulist);
+        
+        List<Group> glist = new ArrayList();
+        glist.add(group);
+          u1.setGroups(glist);
+          u2.setGroups(glist);
+        
+        mockMvc.perform(post("/group/newGroup").content(objectMapper.writeValueAsString(ulist)).contentType("application/json"));
+        ArgumentCaptor<Group> groupCaptor = ArgumentCaptor.forClass(Group.class);
+        verify(groupRepository, times(1)).save(groupCaptor.capture());
+        assertThat(groupCaptor.getValue().getUsers().get(0).getName()).isEqualTo(ulist.get(0).getName());
+        
+        
+        
+    }
+    @ Test
+    void registerTest() throws Exception{
+        User u1= new User("Bori","bori@bori.hu","pingvin",Role.USER,null); 
+        //mockMvc.perform(post("/users/users/register",u1).contentType("application/json"));
+        mockMvc.perform(post("/users/users/register").content(objectMapper.writeValueAsString(u1)).contentType("application/json"));
+        ArgumentCaptor<User> userCaptor = ArgumentCaptor.forClass(User.class);
+        verify(userRepository, times(1)).save(userCaptor.capture());
+       
+         assertThat(userCaptor.getValue().getName()).isEqualTo("Bori");
+         assertThat(userCaptor.getValue().getEmail()).isEqualTo("bori@bori.hu");
+         assertThat(userCaptor.getValue().getRole()).isEqualTo(Role.USER);
     }
 
 

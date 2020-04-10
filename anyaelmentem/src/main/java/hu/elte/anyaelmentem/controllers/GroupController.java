@@ -10,6 +10,7 @@ import hu.elte.anyaelmentem.entities.User;
 import hu.elte.anyaelmentem.repositories.GroupRepository;
 import hu.elte.anyaelmentem.repositories.UserRepository;
 import hu.elte.anyaelmentem.security.AuthenticatedUser;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -41,8 +43,9 @@ public class GroupController {
     * uj csapat 
     */
    @PostMapping("/newGroup")
-   public ResponseEntity<Group> newGroup(List<User> myMember){
+   public ResponseEntity<Group> newGroup(@RequestBody List<User> myMember){
        Group nGroup= new Group();
+       nGroup.setAdmins(new ArrayList<User>());
        nGroup.setUsers(myMember);
        nGroup.getAdmins().add(authenticatedUser.getUser());
        return ResponseEntity.ok(groupRepository.save(nGroup));       
