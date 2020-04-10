@@ -32,7 +32,7 @@ public class ToDo{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column
-    private int id;
+    private Integer id;
             
     private String userId;
     

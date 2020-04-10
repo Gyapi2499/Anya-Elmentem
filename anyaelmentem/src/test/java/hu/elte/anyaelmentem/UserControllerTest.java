@@ -7,11 +7,13 @@ package hu.elte.anyaelmentem;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import hu.elte.anyaelmentem.entities.Chore;
+import hu.elte.anyaelmentem.entities.ToDo;
 import hu.elte.anyaelmentem.repositories.ChoreRepository;
 import hu.elte.anyaelmentem.repositories.GroupRepository;
 import hu.elte.anyaelmentem.repositories.ToDoRepository;
 import hu.elte.anyaelmentem.repositories.UserRepository;
 import hu.elte.anyaelmentem.security.AuthenticatedUser;
+import java.time.LocalDateTime;
 import java.util.Base64;
 import static org.assertj.core.api.Java6Assertions.*;
 import org.junit.BeforeClass;
@@ -27,7 +29,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -110,4 +111,21 @@ public class UserControllerTest {
       assertThat(choreCaptor.getValue().getName()).isEqualTo(chore.getName());
     }
 
+
+    @Test
+    void AddToDoTest() throws Exception {
+    ToDo todo = new ToDo(null, "asd@asd.hu", "mosogatas", LocalDateTime.now(), LocalDateTime.now(), 1, false);
+    mockMvc.perform(post("/todo/add", todo).contentType("application/json"));
+    
+    ArgumentCaptor<ToDo> todoCaptor = ArgumentCaptor.forClass(ToDo.class);
+    verify(toDoRepository, times(1)).save(todoCaptor.capture());
+    assertThat(todoCaptor.getValue().getUserId()).isEqualTo(todo.getUserId());
+    assertThat(todoCaptor.getValue().getChores()).isEqualTo(todo.getChores());
+    assertThat(todoCaptor.getValue().getFromDate()).isEqualTo(todo.getFromDate());
+    assertThat(todoCaptor.getValue().getToDate()).isEqualTo(todo.getToDate());
+    assertThat(todoCaptor.getValue().getGroupId()).isEqualTo(todo.getGroupId());
+    assertThat(todoCaptor.getValue().getReady()).isEqualTo(todo.getReady());
+
+    
+    }
 }
