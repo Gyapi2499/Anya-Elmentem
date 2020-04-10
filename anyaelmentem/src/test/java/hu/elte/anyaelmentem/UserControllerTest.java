@@ -93,6 +93,14 @@ public class UserControllerTest {
             mockMvc.perform(get("/chores/allChores").header("Access-Control-Allow-Origin", "*").header("Authorization" , "Basic "+encoded).contentType("application/json")).andExpect(status().is(401));
         }
     }
+    @Test
+    void usersTest() throws Exception {
+        if(test){
+            mockMvc.perform(get("/users/users").contentType("application/json")).andExpect(status().is(200));
+        }else{
+            mockMvc.perform(get("/users/users").header("Access-Control-Allow-Origin", "*").header("Authorization" , "Basic "+encoded).contentType("application/json")).andExpect(status().is(401));
+        }
+    }
     
     /*@Test
     void whenValidInput_thenReturnsUserResource() throws Exception {
@@ -152,7 +160,7 @@ public class UserControllerTest {
     }
 
 
-    @Test
+    /*@Test
     void AddToDoTest() throws Exception {
     ToDo todo = new ToDo(null, "asd@asd.hu", "mosogatas", LocalDateTime.now(), LocalDateTime.now(), 1, false);
     mockMvc.perform(post("/todo/add", todo).contentType("application/json"));
@@ -167,5 +175,9 @@ public class UserControllerTest {
     assertThat(todoCaptor.getValue().getReady()).isEqualTo(todo.getReady());
 
     
-    }
+    }*/
+    
+     
+    
+    
 }
