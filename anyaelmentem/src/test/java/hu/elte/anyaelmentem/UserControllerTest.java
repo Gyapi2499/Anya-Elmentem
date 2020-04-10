@@ -196,7 +196,28 @@ public class UserControllerTest {
          verify(toDoRepository, times(1)).save(todoCaptor.capture());
          assertThat(todoCaptor.getValue().getReady()).isEqualTo(true);       
     }
-     
     
-    
+    @Test
+    void getMemberListTest() throws Exception {
+        if(test){
+        User u1= new User("bori","bori@bori.hu","pingvin",User.Role.ADMIN,null);        
+        User u2= new User("andris","andris@bori.hu","jegesmaci",User.Role.ADMIN,null);
+        List<User> ulist= new ArrayList<>();
+        ulist.add(u1);
+        ulist.add(u2);  //van egy listám a userrel      
+        Group group = new Group(1,new ArrayList<User>(),ulist); 
+        List<Group> glist = new ArrayList();
+        glist.add(group);//
+        u1.setGroups(glist);
+        u2.setGroups(glist);
+        when(groupRepository.findById(1)).thenReturn(Optional.of(group)); 
+        Group g = new Group(1,new ArrayList<User>(),ulist);
+       
+            mockMvc.perform(get("/group/getMemberList/1").contentType("application/json")).andExpect(status().is(200));
+        }else{
+            mockMvc.perform(get("/group/getMemberList/1")).andExpect(status().is(401));
+        }
+    }   
+      
 }
+
