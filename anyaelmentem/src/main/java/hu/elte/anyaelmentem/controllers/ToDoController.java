@@ -89,7 +89,8 @@ public class ToDoController {
                     }
                     todo.setUserId(minUser.getEmail());
                     boolean right = false;
-                    while(!right){
+                    LocalDateTime startDay= monday;
+                    while(!right && !monday.isAfter(startDay.withDayOfYear(startDay.getDayOfYear()+7).withHour(8))) {
                         right=true;
                         for(ToDo t:toDoRepository.findAllByUserId(minUser.getEmail()).get()){
                             if((monday.isAfter(t.getFromDate()) && monday.isBefore(t.getToDate()))
@@ -98,7 +99,10 @@ public class ToDoController {
                                 break;
                             }
                         }
-                    monday.plusHours(1);
+                    if(monday.getHour()!=22)
+                        monday=monday.plusHours(1);
+                    else
+                        monday=monday.plusDays(1).withHour(0);
                     }
                     if(right){
                         todo.setFromDate(monday);
@@ -116,15 +120,21 @@ public class ToDoController {
                     long dayNum = day.getLong(ChronoField.DAY_OF_WEEK);
                     LocalDateTime monday = now.withDayOfYear(now.getDayOfYear()-(int)dayNum-1).withHour(8).withMinute(0).withSecond(0);
                     boolean right = true;
-                    while(right){
-                        for(ToDo t:toDoRepository.findAllByUserId(todo.getUserId()).get()){
+                    List<ToDo> todos = toDoRepository.findAllByUserId(todo.getUserId()).get();
+                    LocalDateTime startDay= monday;
+                    while(right && !monday.isAfter(startDay.withDayOfYear(startDay.getDayOfYear()+7).withHour(8))){
+                        for(ToDo t:todos){
                             if((monday.isAfter(t.getFromDate()) && monday.isBefore(t.getToDate()))
                                     || monday.withHour(monday.getHour()+1).isAfter(t.getFromDate()) && monday.withHour(monday.getHour()+1).isBefore(t.getToDate())){
                                 right=false;
                                 break;
                             }
                         }
-                    monday.plusHours(1);
+                    System.out.println(monday);
+                    if(monday.getHour()!=22)
+                        monday=monday.plusHours(1);
+                    else
+                        monday=monday.plusDays(1).withHour(0);
                     }
                     if(right){
                         todo.setFromDate(monday);
