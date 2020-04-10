@@ -20,6 +20,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.Optional;
 import static org.assertj.core.api.Java6Assertions.*;
 import org.junit.BeforeClass;
 import org.junit.jupiter.api.BeforeEach;
@@ -101,6 +102,8 @@ public class UserControllerTest {
             mockMvc.perform(get("/users/users").header("Access-Control-Allow-Origin", "*").header("Authorization" , "Basic "+encoded).contentType("application/json")).andExpect(status().is(401));
         }
     }
+     
+    
     
     /*@Test
     void whenValidInput_thenReturnsUserResource() throws Exception {
@@ -177,6 +180,17 @@ public class UserControllerTest {
     
     }*/
     
+    @Test
+    void readyOrNotTest() throws Exception {
+        ToDo todos = new ToDo(1, "asd@asd.hu", "mosogatas", LocalDateTime.now(), LocalDateTime.now(), 1, false);
+        when(toDoRepository.findById(1)).thenReturn(Optional.of(todos));     
+        ToDo todo = new ToDo(1, "asd@asd.hu", "mosogatas", LocalDateTime.now(), LocalDateTime.now(), 1, false);
+               
+        mockMvc.perform(post("/todo/readyOrNot/1").content(objectMapper.writeValueAsString(todo)).contentType("application/json"));
+         ArgumentCaptor<ToDo> todoCaptor = ArgumentCaptor.forClass(ToDo.class);
+         verify(toDoRepository, times(1)).save(todoCaptor.capture());
+         assertThat(todoCaptor.getValue().getReady()).isEqualTo(true);       
+    }
      
     
     
