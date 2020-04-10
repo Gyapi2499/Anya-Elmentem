@@ -22,6 +22,7 @@ import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 import static org.assertj.core.api.Java6Assertions.*;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -35,6 +36,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -76,9 +78,8 @@ public class UserControllerTest {
     private boolean test;
 
     
-    @BeforeClass
+    @Before
     void init(){
-        
     }
     
     @BeforeEach
@@ -105,15 +106,19 @@ public class UserControllerTest {
      
     
     
-    /*@Test
+    @Test
     void whenValidInput_thenReturnsUserResource() throws Exception {
+        Chore choress = new Chore("asd");
+        when(choreRepository.save(any(Chore.class))).thenReturn(choress);
+        
+        
         MvcResult mvcResult = mockMvc.perform(post("/chores/newChore/asd").contentType("application/json")).andReturn();
         System.out.println( mvcResult.getResponse().getContentAsString());
         Chore chore = new Chore("asd");
         String actualResponseBody = mvcResult.getResponse().getContentAsString();
 
         assertThat(objectMapper.writeValueAsString(chore)).isEqualToIgnoringWhitespace(actualResponseBody);
-    }*/
+    }
     
     @Test
     void whenValidInput_thenMapsToBusinessModel() throws Exception {
