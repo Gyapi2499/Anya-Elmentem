@@ -204,7 +204,7 @@ public class UserControllerTest {
         User u2= new User("andris","andris@bori.hu","jegesmaci",User.Role.ADMIN,null);
         List<User> ulist= new ArrayList<>();
         ulist.add(u1);
-        ulist.add(u2);  //van egy listám a userrel      
+        ulist.add(u2);       
         Group group = new Group(1,new ArrayList<User>(),ulist); 
         List<Group> glist = new ArrayList();
         glist.add(group);//
@@ -218,6 +218,21 @@ public class UserControllerTest {
             mockMvc.perform(get("/group/getMemberList/1")).andExpect(status().is(401));
         }
     }   
+    
+    @Test
+    void getWeekTest() throws Exception {
+        if(test){
+            ToDo todos = new ToDo(1, "asd@asd.hu", "mosogatas", LocalDateTime.now(), LocalDateTime.now(), 1, false);
+            List<ToDo> ltd= new ArrayList();
+            ltd.add(todos);
+            when(toDoRepository.findAllByUserId("asd@asd.hu")).thenReturn(Optional.of(ltd));
+            ToDo todo = new ToDo(1, "asd@asd.hu", "mosogatas", LocalDateTime.now(), LocalDateTime.now(), 1, false);
+
+            mockMvc.perform(get("/todo/getWeek/asd@asd.hu").contentType("application/json")).andExpect(status().is(200));
+        }else{
+            mockMvc.perform(get("/todo/getWeek/asd@asd.hu")).andExpect(status().is(401));
+        }        
+    }
       
 }
 
