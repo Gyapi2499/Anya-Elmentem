@@ -1,13 +1,12 @@
 package hu.elte.anyaelmentem.controllers;
 
-import hu.elte.anyaelmentem.entities.Users;
+import hu.elte.anyaelmentem.entities.User;
 import hu.elte.anyaelmentem.repositories.UserRepository;
 import hu.elte.anyaelmentem.security.AuthenticatedUser;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,23 +29,23 @@ public class UserController {
     private AuthenticatedUser authenticatedUser;
 
     @PostMapping("/users/register")
-    public ResponseEntity<Users> register(@RequestBody Users user) {
-        Optional<Users> oUser = userRepository.findByEmail(user.getEmail());
+    public ResponseEntity<User> register(@RequestBody User user) {
+        Optional<User> oUser = userRepository.findByEmail(user.getEmail());
         if (oUser.isPresent()) {
             return ResponseEntity.badRequest().build();
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRole(Users.Role.USER);
+        user.setRole(User.Role.USER);
         return ResponseEntity.ok(userRepository.save(user));
     }
 
-    @PostMapping("login")
-    public ResponseEntity<Users> login() {
+    @PostMapping("/login")
+    public ResponseEntity<User> login() {
         return ResponseEntity.ok(authenticatedUser.getUser());
     }
 
     @GetMapping("/users")
-    public List<Users> getUsers() {
+    public List<User> getUsers() {
         return userRepository.findAll();
     }
 }

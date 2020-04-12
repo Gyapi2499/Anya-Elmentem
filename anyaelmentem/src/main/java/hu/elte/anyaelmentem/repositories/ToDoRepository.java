@@ -5,10 +5,17 @@
  */
 package hu.elte.anyaelmentem.repositories;
 
+import hu.elte.anyaelmentem.entities.ToDo;
+import hu.elte.anyaelmentem.entities.User;
+import java.util.List;
+import java.util.Optional;
+import org.springframework.data.repository.CrudRepository;
+
 /**
  *
  * @author Máté
  */
-public class ToDoRepository {
-    
+public interface ToDoRepository extends CrudRepository<ToDo, Integer>{//todos-olyan obektumokat fog visszadnoi a repo és Integer -olyan tipusú az id
+    Optional<List<ToDo>> findAllByUserId(String user);//spring black magic
+    List<ToDo> findAll();
 }
