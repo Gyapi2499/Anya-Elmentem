@@ -51,8 +51,8 @@ public class GroupController {
        return ResponseEntity.ok(groupRepository.save(nGroup));       
    }
    
-   @PostMapping("/addMember")//csapathoz adok hozzá
-   public ResponseEntity<Group> addMember(int id, User addM){
+   @PostMapping("/addMember/{id}")//csapathoz adok hozzá
+   public ResponseEntity<Group> addMember(@PathVariable int id, @RequestBody User addM){
        if(authenticatedUser.getUser().getRole()== User.Role.ADMIN || groupRepository.findById(id).get().getAdmins().contains(authenticatedUser.getUser())) {
        Group temp=groupRepository.findById(id).get();
        temp.getUsers().add(addM);
@@ -60,8 +60,8 @@ public class GroupController {
    } return ResponseEntity.badRequest().build(); 
 }
    
-   @PostMapping("/shareAdmin")
-   public ResponseEntity<Group> shareAdmin(int id, List<User> user){
+   @PostMapping("/shareAdmin/{id}")
+   public ResponseEntity<Group> shareAdmin(@PathVariable int id, @RequestBody List<User> user){
        if(authenticatedUser.getUser().getRole()== User.Role.ADMIN || groupRepository.findById(id).get().getAdmins().contains(authenticatedUser.getUser())) {
        Group temp=groupRepository.findById(id).get();
        for(User u:user){
@@ -72,8 +72,8 @@ public class GroupController {
    } return ResponseEntity.badRequest().build(); 
 }
    
-    @PostMapping("/takeAdmin")
-    public ResponseEntity<Group> takeAdmin(int id, List<User> user){
+    @PostMapping("/takeAdmin/{id}")
+    public ResponseEntity<Group> takeAdmin(@PathVariable int id, @RequestBody List<User> user){
        if(authenticatedUser.getUser().getRole()== User.Role.ADMIN || groupRepository.findById(id).get().getAdmins().contains(authenticatedUser.getUser())) {
        Group temp=groupRepository.findById(id).get();
        for(User u:user){
@@ -92,8 +92,8 @@ public class GroupController {
        } return ResponseEntity.badRequest().build(); 
     }
     
-    @PostMapping("/deleteMember")
-    public ResponseEntity<Group> deleteMember(int id, User deleteM){
+    @PostMapping("/deleteMember/{id}")
+    public ResponseEntity<Group> deleteMember(@PathVariable int id, @RequestBody User deleteM){
        if(authenticatedUser.getUser().getRole()== User.Role.ADMIN || groupRepository.findById(id).get().getAdmins().contains(authenticatedUser.getUser())) {
        Group temp=groupRepository.findById(id).get();
        temp.getUsers().remove(deleteM);
