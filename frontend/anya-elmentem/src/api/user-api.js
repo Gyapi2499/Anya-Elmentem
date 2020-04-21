@@ -38,5 +38,15 @@ export default {
       }
     }
     return axios.get('http://localhost:8080/users/login', Http)
+  },
+  getGroup (usersRequest) {
+    const Http = {
+      headers: {
+        Authorization: `Basic ${usersRequest.token}`,
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      }
+    }
+    return axios.get('http://localhost:8080/users/groups', Http)
   }
 }

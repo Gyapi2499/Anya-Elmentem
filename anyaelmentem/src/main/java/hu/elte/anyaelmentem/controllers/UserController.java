@@ -1,8 +1,10 @@
 package hu.elte.anyaelmentem.controllers;
 
+import hu.elte.anyaelmentem.entities.Group;
 import hu.elte.anyaelmentem.entities.User;
 import hu.elte.anyaelmentem.repositories.UserRepository;
 import hu.elte.anyaelmentem.security.AuthenticatedUser;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +49,11 @@ public class UserController {
     @GetMapping("/users")
     public List<User> getUsers() {
         return userRepository.findAll();
+    }
+    
+   @GetMapping(value = "/groups")
+    public ResponseEntity<Object> getGroup() {        
+        List<Group> party = userRepository.findByGroup();        
+        return  ResponseEntity.ok(party);
     }
 }
