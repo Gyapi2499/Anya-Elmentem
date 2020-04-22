@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/home/Home.vue'
 import newTodo from '../views/newTodo/newTodo.vue'
+import Signup from '../views/registration/registration.vue'
 
 
 
@@ -26,7 +27,14 @@ const routes = [
     name: 'newTodo',
     
     component: newTodo
-  }
+  },
+  {
+    path: '/signup',
+    name: 'signup',
+    components: {
+      default: Signup
+    }
+  },
 ]
 
 const router = new VueRouter({

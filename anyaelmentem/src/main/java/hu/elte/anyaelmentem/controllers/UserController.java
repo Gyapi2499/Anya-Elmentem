@@ -1,6 +1,7 @@
 package hu.elte.anyaelmentem.controllers;
 
 import hu.elte.anyaelmentem.entities.Group;
+import hu.elte.anyaelmentem.entities.RegisterDTO;
 import hu.elte.anyaelmentem.entities.User;
 import hu.elte.anyaelmentem.repositories.UserRepository;
 import hu.elte.anyaelmentem.security.AuthenticatedUser;
@@ -31,14 +32,12 @@ public class UserController {
     private AuthenticatedUser authenticatedUser;
 
     @PostMapping("/users/register")
-    public ResponseEntity<User> register(@RequestBody User user) {
-        Optional<User> oUser = userRepository.findByEmail(user.getEmail());
+    public ResponseEntity<User> register(@RequestBody RegisterDTO inUser) {
+        Optional<User> oUser = userRepository.findByEmail(inUser.getEmail());
         if (oUser.isPresent()) {
             return ResponseEntity.badRequest().build();
         }
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRole(User.Role.USER);
-        return ResponseEntity.ok(userRepository.save(user));
+        return ResponseEntity.ok(userRepository.save(new User(inUser.getUsername(),inUser.getEmail(),passwordEncoder.encode(inUser.getPassword()),User.Role.USER,null)));
     }
 
     @PostMapping("/login")

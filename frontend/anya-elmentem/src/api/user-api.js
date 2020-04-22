@@ -12,9 +12,7 @@ export default {
     return axios.post('http://localhost:8080/users/users/register',{
         name: userRequest.name,
         email: userRequest.email,
-        password: userRequest.password,
-        role: userRequest.role,
-        qroups: userRequest.groups
+        password: userRequest.password
     }, Http)
   },
 
