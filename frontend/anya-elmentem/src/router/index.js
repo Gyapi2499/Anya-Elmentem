@@ -6,6 +6,8 @@ import newTodo from '../views/newTodo/newTodo.vue'
 import Signup from '../views/registration/registration.vue'
 import Login from '../views/login/login.vue'
 
+
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -31,7 +33,7 @@ const routes = [
   {
     path: '/newTodo',
     name: 'newTodo',
-
+    
     component: newTodo
   },
   {
