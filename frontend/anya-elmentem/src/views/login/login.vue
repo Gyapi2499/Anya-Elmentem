@@ -21,9 +21,9 @@
 
             <b-form-input
               id="input-1"
-              v-model="loginRequest.name"
+              v-model="loginRequest.email"
               required
-              placeholder="Adja meg a nevét"
+              placeholder="Adja meg az e-mail címét"
               autofocus
             ></b-form-input>
 
@@ -63,7 +63,7 @@ export default {
   data () {
     return {
       loginRequest: {
-        name: '',
+        email: '',
         password: ''
       },
       tried: false,
