@@ -5,11 +5,27 @@
       <router-link to="/about">About</router-link>|
       <router-link to="/newTodo">NewTodo</router-link>|
       <router-link to="/signup">Registration</router-link>|
-      <router-link to="/login">Login</router-link>
+      <router-link to="/login">Login</router-link>|
+      <b-button variant="secondary" @click="doLogout()"><b-icon-box-arrow-in-right></b-icon-box-arrow-in-right></b-button>
     </div>
     <router-view/>
   </div>
 </template>
+
+<script>
+import { mapActions } from 'vuex'
+import router from './router/index.js'
+
+export default {
+  methods: {
+    ...mapActions(['logout']),
+    doLogout () {
+      this.logout()
+      router.push({ path: '/' })
+    }
+  }
+}
+</script>
 
 <style lang="scss">
 #app {
