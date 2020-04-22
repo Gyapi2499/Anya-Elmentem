@@ -2,10 +2,10 @@ import axios from 'axios'
 
 export default {
   register (userRequest) {
-    return axios.post('http://localhost:8080/users/users/register',{
-        username: userRequest.name,
-        email: userRequest.email,
-        password: userRequest.password
+    return axios.post('http://localhost:8080/users/users/register', {
+      username: userRequest.name,
+      email: userRequest.email,
+      password: userRequest.password
     })
   },
 
@@ -18,10 +18,10 @@ export default {
         'Access-Control-Allow-Origin': '*'
       }
     }
-    return axios.post('http://localhost:8080/users/login',{}, Http)
+    return axios.post('http://localhost:8080/users/login', {}, Http)
   },
 
-   getUsers (usersRequest) {
+  getUsers (usersRequest) {
     const Http = {
       headers: {
         Authorization: `Basic ${usersRequest.token}`,
