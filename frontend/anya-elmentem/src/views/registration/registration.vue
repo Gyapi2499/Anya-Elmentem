@@ -4,7 +4,7 @@
       <b-jumbotron class="col-lg-4 col-md-6 col-sm-10">
 
         <div class="row justify-content-between">
-          <router-link to="/"><b-button class="col back-button" variant="secondary">Vissza</b-button></router-link>
+          <router-link to="/login"><b-button class="col back-button" variant="secondary">Vissza</b-button></router-link>
         </div>
 
         <div class="col-12 title">

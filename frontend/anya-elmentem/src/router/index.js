@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/home/Home.vue'
 import newTodo from '../views/newTodo/newTodo.vue'
 import Signup from '../views/registration/registration.vue'
+import Login from '../views/login/login.vue'
 
 
 
@@ -35,6 +36,13 @@ const routes = [
       default: Signup
     }
   },
+  {
+    path: '/login',
+    name: 'login',
+    components: {
+      default: Login
+    }
+  }
 ]
 
 const router = new VueRouter({

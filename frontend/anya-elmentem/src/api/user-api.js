@@ -10,9 +10,15 @@ export default {
   },
 
   login (loginRequest) {
+    console.log('Ez a név:')
+    console.log(loginRequest.name)
+    console.log('Ez a jelszó:')
+    console.log(loginRequest.password)
+    const token = btoa(`${loginRequest.name}:${loginRequest.password}`)
+    console.log(token)
     const Http = {
       headers: {
-        Authorization: `Basic ${loginRequest.token}`,
+        Authorization: `Basic ${token}`,
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*'
       }
