@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export default {
 
-   newGroup (groupRequest) {
+  newGroup (groupRequest) {
     const Http = {
       headers: {
         Authorization: `Basic ${groupRequest.token}`,
@@ -10,8 +10,8 @@ export default {
         'Access-Control-Allow-Origin': '*'
       }
     }
-    return axios.post('http://localhost:8080/group/newGroup',{
-        myMember: groupRequest.memberList
+    return axios.post('http://localhost:8080/group/newGroup', {
+      myMember: groupRequest.memberList
     }, Http)
   },
 
@@ -23,11 +23,11 @@ export default {
         'Access-Control-Allow-Origin': '*'
       }
     }
-    return axios.post(`http://localhost:8080/group/addMember/${memberRequest.id}`,{
-        name: memberRequest.name,
-        email: memberRequest.email,
-        role: memberRequest.role,
-        qroups: memberRequest.groups
+    return axios.post(`http://localhost:8080/group/addMember/${memberRequest.id}`, {
+      name: memberRequest.name,
+      email: memberRequest.email,
+      role: memberRequest.role,
+      qroups: memberRequest.groups
     }, Http)
   },
 
@@ -40,8 +40,8 @@ export default {
       }
     }
     return axios.post(`http://localhost:8080/group/shareAdmin/${adminRequest.id}`, {
-        user: adminRequest.users
-    },  Http)
+      user: adminRequest.users
+    }, Http)
   },
 
   takeAdmin (adminRequest) {
@@ -53,8 +53,8 @@ export default {
       }
     }
     return axios.post(`http://localhost:8080/group/takeAdmin/${adminRequest.id}`, {
-        user: adminRequest.users
-    },  Http)
+      user: adminRequest.users
+    }, Http)
   },
 
   deleteGroup (deleteRequest) {
@@ -77,10 +77,10 @@ export default {
       }
     }
     return axios.post(`http://localhost:8080/group/deleteMember/${deleteRequest.id}`, {
-        name: deleteRequest.name,
-        email: deleteRequest.email,
-        role: deleteRequest.role,
-        qroups: deleteRequest.groups
+      name: deleteRequest.name,
+      email: deleteRequest.email,
+      role: deleteRequest.role,
+      qroups: deleteRequest.groups
     }, Http)
   },
 

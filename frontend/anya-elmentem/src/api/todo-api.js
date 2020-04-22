@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export default {
 
-   add (todoRequest) {
+  add (todoRequest) {
     const Http = {
       headers: {
         Authorization: `Basic ${todoRequest.token}`,
@@ -10,12 +10,12 @@ export default {
         'Access-Control-Allow-Origin': '*'
       }
     }
-    return axios.post('http://localhost:8080/todo/add',{
-        userId: todoRequest.memberList,
-        chores: todoRequest.chores,
-        fromDate: todoRequest.fromDate,
-        toDate: todoRequest.toDate,
-        groupId: todoRequest.groupId
+    return axios.post('http://localhost:8080/todo/add', {
+      userId: todoRequest.memberList,
+      chores: todoRequest.chores,
+      fromDate: todoRequest.fromDate,
+      toDate: todoRequest.toDate,
+      groupId: todoRequest.groupId
     }, Http)
   },
 
@@ -38,7 +38,7 @@ export default {
         'Access-Control-Allow-Origin': '*'
       }
     }
-    return axios.post(`http://localhost:8080/todo/readyOrNot/${readyOrNotRequest.id}`, {},  Http)
+    return axios.post(`http://localhost:8080/todo/readyOrNot/${readyOrNotRequest.id}`, {}, Http)
   },
 
   deleteTodo (deleteRequest) {
