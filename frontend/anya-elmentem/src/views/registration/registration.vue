@@ -21,7 +21,7 @@
           <router-link to="/login"><b-button variant="success">Bejelentkezés</b-button></router-link>
         </div>
 
-        <div class="row justify-content-center">
+        <div v-if="wasError || !tried" class="row justify-content-center">
           <b-form-group id="input-group-2" label-for="input-3" class="col-10">
             <b-form-input
               v-model="signupRequest.name"

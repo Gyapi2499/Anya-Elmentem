@@ -2,18 +2,11 @@ import axios from 'axios'
 
 export default {
   register (userRequest) {
-    const Http = {
-      headers: {
-        Authorization: `Basic ${userRequest.token}`,
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
-      }
-    }
     return axios.post('http://localhost:8080/users/users/register',{
-        name: userRequest.name,
+        username: userRequest.name,
         email: userRequest.email,
         password: userRequest.password
-    }, Http)
+    })
   },
 
   login (loginRequest) {
