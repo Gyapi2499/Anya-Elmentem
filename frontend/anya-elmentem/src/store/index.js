@@ -16,6 +16,10 @@ export default new Vuex.Store({
     setLogUser (state, user) {
       state.logUser = user
       state.successfulLogin = true
+    },
+    setLogout (state) {
+      state.logUser = {}
+      state.successfulLogin = false
     }
   },
   actions: {
@@ -25,6 +29,9 @@ export default new Vuex.Store({
       }).catch((error) => {
         console.error('Nem sikerült a bejelentkezés', { error, loginRequest })
       })
+    },
+    logout: ({ commit }) => {
+      commit('setLogout')
     }
   },
   modules: {
