@@ -21,6 +21,7 @@ export default new Vuex.Store({
     },
     setLogout (state) {
       state.logUser = {}
+      state.token = ''
       state.successfulLogin = false
     },
     setToken (state, token) {
