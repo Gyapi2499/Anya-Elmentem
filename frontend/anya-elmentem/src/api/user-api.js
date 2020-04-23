@@ -29,7 +29,7 @@ export default {
         'Access-Control-Allow-Origin': '*'
       }
     }
-    return axios.get('http://localhost:8080/users/login', Http)
+    return axios.get('http://localhost:8080/users/users', Http)
   },
   getGroup (usersRequest) {
     const Http = {
@@ -39,6 +39,6 @@ export default {
         'Access-Control-Allow-Origin': '*'
       }
     }
-    return axios.get('http://localhost:8080/users/groups', Http)
+    return axios.get(`http://localhost:8080/users/groups/${usersRequest.id}`, Http)
   }
 }

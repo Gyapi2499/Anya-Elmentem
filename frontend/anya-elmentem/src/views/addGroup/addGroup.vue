@@ -2,14 +2,14 @@
     <div class="addGroup">
         <h1>Hozd létre a csoportodat!</h1>
         <br>
-        <form @submit="submit()" onsubmit = "return false">
-          <h2>Válaszd ki a csoportod a tagjait!</h2>
         <br>
-            <select v-model="selected" :options='users' @click="toggle" multiple>
+        <h2>Válaszd ki a csoportod a tagjait!</h2>
+            <select v-model="selected" multiple>
               <option disabled value="" >Please select one</option>
               <option v-for="i in users" v-bind:key='i' v-bind:value='i'  >{{i.email}}</option>
             </select>
-        <br>
+            <br>
+        <form @submit="submit()" onsubmit = "return false">
             <button type="submit">Csoport létrehozása</button>
         </form>
     </div>
@@ -19,10 +19,13 @@
 import { mapActions, mapState } from 'vuex'
 export default {
   name: 'addGroup',
-  computed: { ...mapState(['token']) },
+  computed: {
+    ...mapState(['token']),
+    ...mapState('addGroup', ['users'])
+  },
   methods: {
     submit () {
-      this.addGroup({ token: this.token })
+      this.addGroup({ token: this.token, memberList: this.selected })
     },
     ...mapActions('addGroup', ['addGroup', 'getUsers'])
   },
