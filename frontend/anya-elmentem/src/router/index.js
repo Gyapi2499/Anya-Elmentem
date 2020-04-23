@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import home from '../views/home/home.vue'
 import addGroup from '../views/addGroup/addGroup.vue'
+import modGroup from '../views/modGroup/modGroup.vue'
 import newTodo from '../views/newTodo/newTodo.vue'
 import Signup from '../views/registration/registration.vue'
 import Login from '../views/login/login.vue'
@@ -26,6 +27,11 @@ const routes = [
     path: '/addGroup',
     name: 'addGroup',
     component: addGroup
+  },
+  {
+    path: '/modGroup',
+    name: 'modGroup',
+    component: modGroup
   },
   {
     path: '/newTodo',
