@@ -8,10 +8,10 @@
         </select>
         <br>
 
-        <h2>Válaszd ki a csoportod a tagjait!</h2>
+        <h2>Adj hozzá egy új csoporttagot!</h2>
         <br>
         <select name="" id="" multiple>
-	        <!-- <option disabled value="">Válaszd ki kit szeretnél hozzáadni a csoportodat!</option> -->
+	        <option disabled value="">Válaszd ki, kit akarsz hozzáadni a csoportodhoz!</option>
             <option>...</option>
             <option><button>Add</button></option>
         </select>
@@ -20,7 +20,7 @@
         <h2>Törölj egy csoporttagot!</h2>
         <br>
         <select name="" id="" multiple>
-	        <option disabled value="">Válaszd ki kit szeretnél törölni!</option>
+	        <option disabled value="">Válaszd ki, kit szeretnél törölni!</option>
             <option>...</option>
             <option><button>Delete</button></option>
         </select>
@@ -29,7 +29,7 @@
          <h2>Adj másnak is admmin jogot!</h2>
         <br>
         <select name="" id="" multiple>
-	        <option disabled value="">Válaszd ki kinek akarsz admin jogot adni!</option>
+	        <option disabled value="">Válaszd ki, kinek akarsz admin jogot adni!</option>
             <option>...</option>
             <option><button>Submit</button></option>
         </select>
