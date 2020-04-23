@@ -113,5 +113,10 @@ public class GroupController {
     }
     
     
+    @GetMapping("/groupss")
+    public ResponseEntity<List<Group>> getGroups(){
+        return ResponseEntity.ok(this.authenticatedUser.getUser().getGroups());
+    }
+    
     
 }
