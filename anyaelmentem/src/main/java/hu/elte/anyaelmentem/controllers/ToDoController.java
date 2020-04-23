@@ -191,5 +191,10 @@ public class ToDoController {
         toDoRepository.deleteById(id);
         return ResponseEntity.ok().build();
     }
+    
+    @GetMapping("/toDos/{email}")
+    public ResponseEntity<List<ToDo>> getAll(@PathVariable String email){
+        return ResponseEntity.ok(toDoRepository.findAllByUserId(email).get());
+    }
 
 }

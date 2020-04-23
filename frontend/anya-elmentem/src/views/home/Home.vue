@@ -1,18 +1,39 @@
 <template>
   <div class="home">
     <!--<img alt="Vue logo" src="../assets/logo.png">-->
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <VueCal :events = "toDos"/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import VueCal from 'vue-cal'
+import 'vue-cal/dist/vuecal.css'
+import { mapState, mapActions } from 'vuex'
 
 export default {
-  name: 'Home',
+  name: 'home',
   components: {
-    HelloWorld
+    VueCal
+  },
+  data () {
+    return {
+      events: [
+
+      ]
+    }
+  },
+  computed: {
+    ...mapState('home', ['toDos']),
+    ...mapState(['logUser', 'token'])
+  },
+  methods: {
+    ...mapActions('home', ['getToDos'])
+  },
+  created () {
+    this.getToDos({ user: this.logUser, token: this.token })
+  },
+  mounted () {
   }
 }
 </script>

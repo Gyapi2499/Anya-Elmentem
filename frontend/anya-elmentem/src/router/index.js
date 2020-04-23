@@ -1,12 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/home/Home.vue'
+import home from '../views/home/home.vue'
 import addGroup from '../views/addGroup/addGroup.vue'
 import newTodo from '../views/newTodo/newTodo.vue'
 import Signup from '../views/registration/registration.vue'
 import Login from '../views/login/login.vue'
-
-
 
 Vue.use(VueRouter)
 
@@ -14,7 +12,7 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: home
   },
   {
     path: '/about',
@@ -27,13 +25,11 @@ const routes = [
   {
     path: '/addGroup',
     name: 'addGroup',
-    
     component: addGroup
   },
   {
     path: '/newTodo',
     name: 'newTodo',
-    
     component: newTodo
   },
   {

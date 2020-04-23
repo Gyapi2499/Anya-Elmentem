@@ -50,5 +50,17 @@ export default {
       }
     }
     return axios.delete(`http://localhost:8080/todo/delete/${deleteRequest.id}`, Http)
+  },
+
+  getAll (request) {
+    const Http = {
+      headers: {
+        Authorization: `Basic ${request.token}`,
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      }
+    }
+    return axios.get(`http://localhost:8080/todo/toDos/${request.email}`, Http)
   }
+
 }
