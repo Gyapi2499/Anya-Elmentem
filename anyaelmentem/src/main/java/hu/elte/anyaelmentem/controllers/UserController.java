@@ -5,6 +5,7 @@ import hu.elte.anyaelmentem.entities.RegisterDTO;
 import hu.elte.anyaelmentem.entities.User;
 import hu.elte.anyaelmentem.repositories.UserRepository;
 import hu.elte.anyaelmentem.security.AuthenticatedUser;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
