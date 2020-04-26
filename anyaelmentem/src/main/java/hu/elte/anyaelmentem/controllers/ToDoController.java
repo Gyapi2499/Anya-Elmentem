@@ -12,7 +12,6 @@ import hu.elte.anyaelmentem.entities.Chore;
 import hu.elte.anyaelmentem.repositories.ChoreRepository;
 import hu.elte.anyaelmentem.repositories.GroupRepository;
 import hu.elte.anyaelmentem.repositories.ToDoRepository;
-import hu.elte.anyaelmentem.repositories.UserRepository;
 import hu.elte.anyaelmentem.security.AuthenticatedUser;
 import java.time.temporal.ChronoUnit;
 import java.time.DayOfWeek;
@@ -46,8 +45,6 @@ public class ToDoController {
     @Autowired
     private GroupRepository groupRepository;
     
-    @Autowired
-    private UserRepository userRepository;    
     
     @Autowired
     ChoreRepository choreRepository;
@@ -70,13 +67,13 @@ public class ToDoController {
                         int time = 0;
                         for(ToDo t:toDoRepository.findAllByUserId(user.getEmail()).get()){
                             if(t.getFromDate().isAfter(monday.withHour(0)) && t.getToDate().isBefore(monday.withHour(0).plusDays(7))){
-                                time+=(t.getFromDate().until(t.getToDate(), ChronoUnit.HOURS));
+                                time+=t.getFromDate().until(t.getToDate(), ChronoUnit.HOURS);
                             }
                             else if(t.getFromDate().isBefore(monday.withHour(0)) && t.getToDate().isAfter(monday.withHour(0))){
-                                time+=(monday.withHour(0).until(t.getToDate(), ChronoUnit.HOURS));
+                                time+=monday.withHour(0).until(t.getToDate(), ChronoUnit.HOURS);
                             }
                             else if(t.getFromDate().isBefore(monday.withHour(0).plusDays(7)) && t.getToDate().isAfter(monday.withHour(0).plusDays(7))){
-                                time+=(t.getFromDate().until(monday.withHour(0).plusDays(7), ChronoUnit.HOURS));
+                                time+=t.getFromDate().until(monday.withHour(0).plusDays(7), ChronoUnit.HOURS);
                             }
                         }
                         if(time<min){
@@ -93,7 +90,7 @@ public class ToDoController {
                     while(!right && !monday.isAfter(startDay.withDayOfYear(startDay.getDayOfYear()+7).withHour(8))) {
                         right=true;
                         for(ToDo t:toDoRepository.findAllByUserId(minUser.getEmail()).get()){
-                            if((monday.isAfter(t.getFromDate()) && monday.isBefore(t.getToDate()))
+                            if(monday.isAfter(t.getFromDate()) && monday.isBefore(t.getToDate())
                                     || monday.withHour(monday.getHour()+1).isAfter(t.getFromDate()) && monday.withHour(monday.getHour()+1).isBefore(t.getToDate())){
                                 right=false;
                                 break;
@@ -124,7 +121,7 @@ public class ToDoController {
                     LocalDateTime startDay= monday;
                     while(right && !monday.isAfter(startDay.withDayOfYear(startDay.getDayOfYear()+7).withHour(8))){
                         for(ToDo t:todos){
-                            if((monday.isAfter(t.getFromDate()) && monday.isBefore(t.getToDate()))
+                            if(monday.isAfter(t.getFromDate()) && monday.isBefore(t.getToDate())
                                     || monday.withHour(monday.getHour()+1).isAfter(t.getFromDate()) && monday.withHour(monday.getHour()+1).isBefore(t.getToDate())){
                                 right=false;
                                 break;

@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import hu.elte.anyaelmentem.entities.Chore;
 import hu.elte.anyaelmentem.entities.ToDo;
 import hu.elte.anyaelmentem.entities.Group;
+import hu.elte.anyaelmentem.entities.RegisterDTO;
 import hu.elte.anyaelmentem.entities.User;
 import hu.elte.anyaelmentem.entities.User.Role;
 import hu.elte.anyaelmentem.repositories.ChoreRepository;
@@ -156,7 +157,7 @@ public class ControllerTest {
     }
     @ Test
     void registerTest() throws Exception{
-        User u1= new User("Bori","bori@bori.hu","pingvin",Role.USER,null); 
+        RegisterDTO u1= new RegisterDTO("Bori","bori@bori.hu","pingvin"); 
         //mockMvc.perform(post("/users/users/register",u1).contentType("application/json"));
         mockMvc.perform(post("/users/users/register").content(objectMapper.writeValueAsString(u1)).contentType("application/json"));
         ArgumentCaptor<User> userCaptor = ArgumentCaptor.forClass(User.class);

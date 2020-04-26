@@ -6,7 +6,6 @@
 package hu.elte.anyaelmentem.repositories;
 
 import hu.elte.anyaelmentem.entities.ToDo;
-import hu.elte.anyaelmentem.entities.User;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;
