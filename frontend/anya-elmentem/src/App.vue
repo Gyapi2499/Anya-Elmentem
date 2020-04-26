@@ -2,11 +2,32 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/about">About</router-link>|
+      <router-link to="/addGroup">Add Group</router-link>|
+      <router-link to="/modGroup">Modify a Group</router-link>|
+      <router-link to="/newTodo">NewTodo</router-link>|
+      <router-link to="/signup">Registration</router-link>|
+      <router-link to="/login">Login</router-link>|
+      <b-button variant="secondary" @click="doLogout()"><b-icon-box-arrow-in-right></b-icon-box-arrow-in-right></b-button>
     </div>
     <router-view/>
   </div>
 </template>
+
+<script>
+import { mapActions } from 'vuex'
+import router from './router/index.js'
+
+export default {
+  methods: {
+    ...mapActions(['logout']),
+    doLogout () {
+      this.logout()
+      router.push({ path: '/' })
+    }
+  }
+}
+</script>
 
 <style lang="scss">
 #app {

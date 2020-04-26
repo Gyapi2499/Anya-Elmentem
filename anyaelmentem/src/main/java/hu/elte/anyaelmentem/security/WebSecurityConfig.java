@@ -5,7 +5,6 @@
  */
 package hu.elte.anyaelmentem.security;
 
-import hu.elte.anyaelmentem.security.CustomBasicAuthenticationEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -40,7 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
               .and()
           .csrf().disable()
           .authorizeRequests()
-              .antMatchers("/h2/**", "/users/register").permitAll()   // important!
+              .antMatchers("/h2/**", "/users/users/register").permitAll()   // important!
               .anyRequest().authenticated()
               .and()
           .httpBasic()

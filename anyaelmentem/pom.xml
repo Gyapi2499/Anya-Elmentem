@@ -95,6 +95,24 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.0</version>
             </plugin>
+            <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-pmd-plugin</artifactId>
+        <version>3.13.0</version> <!-- or use version from pluginManagement -->
+        <configuration>
+            <!-- failOnViolation is actually true by default, but can be disabled -->
+            <failOnViolation>true</failOnViolation>
+            <!-- printFailingErrors is pretty useful -->
+            <printFailingErrors>true</printFailingErrors>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
         </plugins>
     </build>
 </project>

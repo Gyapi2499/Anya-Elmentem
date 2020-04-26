@@ -5,9 +5,11 @@
  */
 package hu.elte.anyaelmentem.repositories;
 
+import hu.elte.anyaelmentem.entities.Group;
 import hu.elte.anyaelmentem.entities.User;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 /**
@@ -16,6 +18,8 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface UserRepository extends CrudRepository<User, String>{
     Optional<User> findByEmail(String email);
-    List<User> findAll();    
+    List<User> findAll();  
+    @Query("select g FROM Group g ")
+    List<Group> findByGroup();
 }
 
