@@ -1,25 +1,47 @@
-import groupApi from '../../../api/group-api'
-import userApi from '../../../api/user-api'
+import apiGroup from '../../../api/group-api'
+import apiUser from '../../../api/user-api'
 
 export default {
-    getUserList({commit},params){
-        console.log(params)
-        groupApi.getUserList(params).then(response=>{
-            commit('setUserList',response.data);
-        }).catch(error=>{
-            console.log(error);
-        });
-    },
-   getGroups({commit},params){
-        console.log(params)
-        userApi.getGroup(params).then(response=>{
-            commit('setMemberList',response.data);
-        }).catch(error=>{
-            console.log(error);
-        });
-    },
-    addGroup(commit,params){
-        return groupApi.add(params)
-    }
+  getGroup ({ commit }, params) {
+    apiGroup.getGroup(params).then(response => {
+      commit('setGroup', response.data)
+    }).catch(error => {
+      console.log(error)
+    })
+  },
+  getUsers ({ commit }, params) {
+    apiUser.getUsers(params).then(response => {
+      commit('setUsers', response.data)
+    }).catch(error => {
+      console.log(error)
+    })
+  },
+  addMembers ({ commit }, params) {
+    apiGroup.addMembers(params).then(response => {
+      commit('addMembers', response.data)
+    }).catch(error => {
+      console.log(error)
+    })
+  },
+  delMembers ({ commit }, params) {
+    apiGroup.delMembers(params).then(response => {
+      commit('delMembers', response.data)
+    }).catch(error => {
+      console.log(error)
+    })
+  },
+  addAdmin ({ commit }, params) {
+    apiGroup.addAdmin(params).then(response => {
+      commit('addAdmin', response.data)
+    }).catch(error => {
+      console.log(error)
+    })
+  },
+  delAdmin ({ commit }, params) {
+    apiGroup.delAdmin(params).then(response => {
+      commit('delAdmin', response.data)
+    }).catch(error => {
+      console.log(error)
+    })
+  }
 }
-    

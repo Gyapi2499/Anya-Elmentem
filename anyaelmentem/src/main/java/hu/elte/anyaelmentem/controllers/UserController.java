@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,9 +50,25 @@ public class UserController {
         return userRepository.findAll();
     }
     
-   @GetMapping(value = "/groups")
-    public ResponseEntity<Object> getGroup() {        
-        List<Group> party = userRepository.findByGroup();        
-        return  ResponseEntity.ok(party);
+   @GetMapping(value = "/groups/{id}")
+    public ResponseEntity<Object> getGroup(@PathVariable String id) {   
+        User user = userRepository.findByEmail(id).get();
+        List<Integer> number= new ArrayList<>();
+        List<Group> party = userRepository.findByGroup(); 
+        for(int i=0;i<party.size();i++){
+            List<List<User>> u = new ArrayList<>();
+            System.out.println(party.get(i).getId());
+            u.add(party.get(i).getUsers());
+            
+            for(int j=0;j<u.size();j++){
+                System.out.println("kiscica");
+                if(u.get(j).contains(user)){
+                    
+                    number.add(party.get(i).getId());
+                }
+            }
+            
+        }
+        return  ResponseEntity.ok(number);
     }
 }

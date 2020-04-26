@@ -11,7 +11,7 @@ export default {
       }
     }
     return axios.post('http://localhost:8080/todo/add', {
-      userId: todoRequest.memberList,
+      userId: todoRequest.userId,
       chores: todoRequest.chores,
       fromDate: todoRequest.fromDate,
       toDate: todoRequest.toDate,

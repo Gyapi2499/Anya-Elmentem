@@ -1,4 +1,3 @@
 export default {
-  memberList: [],
-  group: []
+  users: []
 }
