@@ -11,21 +11,21 @@
     <br>
     </div>
     <h2>Feladat nekem</h2>
-    <form id="nekem" >
+    <form id="nekem" Onsubmit="return false">
         <a>Feladat megnevezése:</a>
         <br>
-        <input v-model="feladat" type= "text " name= "title" placeholder="Add todo..."><br>
+        <input v-model="feladatn" type= "text " name= "title" placeholder="Add todo..."><br>
         <a> Feladat kezdete:</a>
         <br>
-        <datetime v-model="kezdet" type="datetime"  format="yyyy-MM-dd HH:mm:ss"></datetime>
+        <datetime v-model="kezdetn" type="datetime"  format="yyyy-MM-dd HH:mm:ss"></datetime>
         <br>
         <a> Feladat vége:</a>
-        <datetime type="datetime" v-model="veg" format="yyyy-MM-dd HH:mm:ss"></datetime>
+        <datetime type="datetime" v-model="vegn" format="yyyy-MM-dd HH:mm:ss"></datetime>
         <br>
-        <button @click="save()"> Mentés </button>
+        <button @click="save()" type="submit"> Mentés </button>
         </form>
     <div >
-      <form id="masnak"  >
+      <form id="masnak"  Onsubmit="return false">
         <h2>Feladat másnak:</h2>
         <a>Feladat megnevezése:</a>
         <br>
@@ -44,7 +44,7 @@
           <option v-for="cat in memberList" v-bind:key='cat' v-bind:value='cat'>{{cat.name}}</option>
         </select>
         <br>
-        <button @click="save2()"> Mentés </button>
+        <button @click="save2()" type="submit"> Mentés </button>
     </form>
     </div>
   </div>
@@ -58,6 +58,9 @@ export default {
     return {
       selected: '',
       select: '',
+      feladatn: '',
+      kezdetn: '',
+      vegn: '',
       feladat: '',
       kezdet: '',
       veg: ''
@@ -66,10 +69,10 @@ export default {
   methods: {
     ...mapActions('newTodo', ['getMemberList', 'addTodo', 'getGroup']),
     save () {
-      this.addTodo({ userId: this.logUser.email, chores: this.feladat, fromDate: this.kezdet, toDate: this.veg, groupId: this.selected, token: this.token })
+      this.addTodo({ userId: this.logUser.email, chores: this.feladatn, fromDate: this.kezdetn, toDate: this.vegn, groupId: this.selected, ready: false, token: this.token })
     },
     save2 () {
-      this.addTodo({ userId: this.select.email, chores: this.feladat, fromDate: this.kezdet, toDate: this.veg, groupId: this.selected, token: this.token })
+      this.addTodo({ userId: this.select.email, chores: this.feladat, fromDate: this.kezdet, toDate: this.veg, groupId: this.selected, ready: false, token: this.token })
     }
   },
   created () {

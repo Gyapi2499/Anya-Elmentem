@@ -15,7 +15,8 @@ export default {
       chores: todoRequest.chores,
       fromDate: todoRequest.fromDate,
       toDate: todoRequest.toDate,
-      groupId: todoRequest.groupId
+      groupId: todoRequest.groupId,
+      ready: false
     }, Http)
   },
 
