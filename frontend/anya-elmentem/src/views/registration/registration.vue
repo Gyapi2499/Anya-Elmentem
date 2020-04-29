@@ -21,7 +21,7 @@
           <router-link to="/login"><b-button variant="success">Bejelentkezés</b-button></router-link>
         </div>
 
-        <div v-if="wasError || !tried" class="row justify-content-center">
+        <b-form v-if="wasError || !tried" class="row justify-content-center vld-parent" ref="formContainer">
           <b-form-group id="input-group-2" label-for="input-3" class="col-10">
             <b-form-input
               v-model="signupRequest.name"
@@ -47,7 +47,7 @@
 
           </b-form-group>
           <b-button @click="logup()" variant="success">Regisztrálok</b-button>
-        </div>
+        </b-form>
 
       </b-jumbotron>
     </div>
@@ -72,14 +72,29 @@ export default {
         password: ''
       },
       errMessage: 'Sikertelen Regisztráció',
-      tried: false
+      tried: false,
+      fullPage: false
     }
   },
   methods: {
     ...mapActions('Registration', ['signup']),
-    async logup () {
-      await this.signup(this.signupRequest)
+    logup () {
+      const loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.formContainer,
+        canCancel: true,
+        onCancel: this.onCancel
+      })
+      this.signup(this.signupRequest)
       this.tried = true
+      this.showError = false
+      setTimeout(() => {
+        loader.hide()
+        this.showError = true
+      }, 5000)
+    },
+    onCancel () {
+      console.log('User cancelled the loader.')
+      this.showError = true
     }
   },
   watch: {
