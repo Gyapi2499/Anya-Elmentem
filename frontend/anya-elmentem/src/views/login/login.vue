@@ -83,7 +83,9 @@ export default {
       this.showError = false
       setTimeout(() => {
         loader.hide()
-        this.showError = true
+        if (!this.successfulLogin) {
+          this.showError = true
+        }
       }, 5000)
     },
     onCancel () {
