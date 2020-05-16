@@ -8,8 +8,7 @@
       <router-link to="/newTodo">NewTodo</router-link>|
       <router-link to="/newMyTodo">NewMyTodo</router-link>|
       <router-link to="/signup">Registration</router-link>|
-      <router-link to="/login">Login</router-link>|
-      <router-link to="/ujCsoport">ujCsoport</router-link>
+      <router-link to="/login">Login</router-link>
       <b-button variant="secondary" @click="doLogout()"><b-icon-box-arrow-in-right></b-icon-box-arrow-in-right></b-button>
     </div>
     <router-view/>
