@@ -67,6 +67,14 @@ public class GroupController {
 
        userRepository.save(authenticatedUser.getUser());
 
+       for(User user : myMember){
+           List<Group> tempGroupList = groupRepository.findUserG(user.getEmail());
+           tempGroupList.add(newGroup);
+           user.setGroups(tempGroupList);
+
+           userRepository.save(user);
+       }
+
        return ResponseEntity.ok(newGroup);
 
    }
