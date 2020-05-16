@@ -8,6 +8,7 @@ package hu.elte.anyaelmentem.controllers;
 import hu.elte.anyaelmentem.entities.Group;
 import hu.elte.anyaelmentem.entities.User;
 import hu.elte.anyaelmentem.repositories.GroupRepository;
+import hu.elte.anyaelmentem.repositories.UserRepository;
 import hu.elte.anyaelmentem.security.AuthenticatedUser;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +35,9 @@ public class GroupController {
     @Autowired
     private GroupRepository groupRepository;
     
+    @Autowired
+    private UserRepository userRepository;
+    
     
    
     /**    
@@ -45,6 +49,8 @@ public class GroupController {
        nGroup.setAdmins(new ArrayList<User>());
        nGroup.setUsers(myMember);
        nGroup.getAdmins().add(authenticatedUser.getUser());
+       authenticatedUser.getUser().getGroups().add(nGroup);
+       userRepository.save(authenticatedUser.getUser());
        return ResponseEntity.ok(groupRepository.save(nGroup));       
    }
    
