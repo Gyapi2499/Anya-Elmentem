@@ -1,17 +1,14 @@
 <template>
-  <div class="newTodo">
+  <div class="NotMyTodo">
     <div >
     <h2>Melyik csoportomnak szerétnék feladatot adni?</h2>
     <br>
-            <select v-model="selected" :options='group'>
-              <option disabled value="" >Please select one</option>
-              <option v-for="i in group" v-bind:key='i' v-bind:value='i'  >{{i}}</option>
-            </select >
-            <br>
+    <select v-model="selected" :options='group'>
+        <option disabled value="" >Please select one</option>
+        <option v-for="i in group" v-bind:key='i' v-bind:value='i'  >{{i}}</option>
+    </select >
     <br>
-    </div>
-    <div >
-      <form id="masnak"  Onsubmit="return false">
+    <form id="masnak"  Onsubmit="return false">
         <h2>Feladat másnak:</h2>
         <a>Feladat megnevezése:</a>
         <br>
@@ -39,22 +36,19 @@
 <script>
 import { mapActions, mapState } from 'vuex'
 export default {
-  name: 'newTodo',
+  name: 'NotMyTodo',
   data () {
     return {
       selected: '',
       select: '',
-      feladatn: '',
-      kezdetn: '',
-      vegn: '',
       feladat: '',
       kezdet: '',
       veg: ''
     }
   },
   methods: {
-    ...mapActions('newTodo', ['getMemberList', 'addtoTodo', 'getAGroups']),
-    save2 () {
+    ...mapActions('NotMyTodo', ['getMemberList', 'addtoTodo', ' getAGroups']),
+    save () {
       this.addtoTodo({ userId: this.select.email, chores: this.feladat, fromDate: this.kezdet, toDate: this.veg, groupId: this.selected, ready: false, token: this.token })
     }
   },
@@ -64,7 +58,7 @@ export default {
   },
   computed: {
     ...mapState(['logUser', 'token']),
-    ...mapState('newTodo', ['memberList', 'group'])
+    ...mapState('NotMyTodo', ['memberList', 'group'])
   },
   watch: {
     selected () {

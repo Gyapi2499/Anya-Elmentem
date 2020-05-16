@@ -19,7 +19,7 @@ export default {
       console.log(error)
     })
   },
-  addtoTodo (commit, params) {
+  addTodo (commit, params) {
     return todoApi.add(params)
   }
 }

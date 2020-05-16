@@ -1,6 +1,5 @@
 import todoApi from '../../../api/todo-api'
 import groupApi from '../../../api/group-api'
-import userApi from '../../../api/user-api'
 
 export default {
   getMemberList ({ commit }, params) {
@@ -11,9 +10,9 @@ export default {
       console.log(error)
     })
   },
-  getGroup ({ commit }, params) {
+  getAGroups ({ commit }, params) {
     console.log(params)
-    userApi.getGroup(params).then(response => {
+    groupApi.getAGroups(params).then(response => {
       commit('setGroup', response.data)
     }).catch(error => {
       console.log(error)
