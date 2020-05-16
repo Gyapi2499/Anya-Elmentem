@@ -5,7 +5,7 @@
     <br>
             <select v-model="selected" :options='group'>
               <option disabled value="" >Please select one</option>
-              <option v-for="i in group" v-bind:key='i' v-bind:value='i'  >{{i}}</option>
+              <option v-for="i in group" v-bind:key='i.id' v-bind:value='i'  >{{i.id}}</option>
             </select >
             <br>
     <br>
@@ -55,7 +55,7 @@ export default {
   methods: {
     ...mapActions('newTodo', ['getMemberList', 'addtoTodo', 'getAGroups']),
     save2 () {
-      this.addtoTodo({ userId: this.select.email, chores: this.feladat, fromDate: this.kezdet, toDate: this.veg, groupId: this.selected, ready: false, token: this.token })
+      this.addtoTodo({ userId: this.select.email, chores: this.feladat, fromDate: this.kezdet, toDate: this.veg, groupId: this.selected.id, ready: false, token: this.token })
     }
   },
   created () {
@@ -70,7 +70,7 @@ export default {
     selected () {
       console.log('sisijsixjknfjhsbghbrfhvbsbdhvbjhsanvjhbfdjgvbhjdbvhwbhvbjhsdbvhbsdbvjsb')
       console.log(this.selected)
-      this.getMemberList({ id: this.selected, token: this.token })
+      this.getMemberList({ id: this.selected.id, token: this.token })
     }
   }
 }

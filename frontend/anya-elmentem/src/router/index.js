@@ -4,7 +4,6 @@ import home from '../views/home/home.vue'
 import addGroup from '../views/addGroup/addGroup.vue'
 import modGroup from '../views/modGroup/modGroup.vue'
 import newTodo from '../views/newTodo/newTodo.vue'
-import NotMyTodo from '../views/NotMyTodo/NotMyTodo.vue'
 import newMyTodo from '../views/newMyTodo/newMyTodo.vue'
 import Signup from '../views/registration/registration.vue'
 import Login from '../views/login/login.vue'
@@ -44,11 +43,6 @@ const routes = [
     path: '/newMyTodo',
     name: 'newMyTodo',
     component: newMyTodo
-  },
-  {
-    path: '/NotMyTodo',
-    name: 'NotMyTodo',
-    component: NotMyTodo
   },
   {
     path: '/signup',
