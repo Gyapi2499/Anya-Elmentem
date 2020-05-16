@@ -10,6 +10,7 @@ import hu.elte.anyaelmentem.entities.User;
 import hu.elte.anyaelmentem.repositories.GroupRepository;
 import hu.elte.anyaelmentem.repositories.UserRepository;
 import hu.elte.anyaelmentem.security.AuthenticatedUser;
+import hu.elte.anyaelmentem.entities.newGroupDTO;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,15 +45,32 @@ public class GroupController {
     * uj csapat 
     */
    @PostMapping("/newGroup")
-   public ResponseEntity<Group> newGroup(@RequestBody List<User> myMember){
+   public ResponseEntity<?> newGroup(@RequestBody newGroupDTO inGroup){
+
+       List<User> myMember= new ArrayList<>();
+       for(String s : inGroup.getUsers()){
+           myMember.add(userRepository.findByEmail(s).get());
+       }
+
        Group nGroup= new Group();
-       nGroup.setAdmins(new ArrayList<User>());
        nGroup.setUsers(myMember);
-       nGroup.getAdmins().add(authenticatedUser.getUser());
-       authenticatedUser.getUser().getGroups().add(nGroup);
-       userRepository.save(authenticatedUser.getUser());
-       return ResponseEntity.ok(groupRepository.save(nGroup));       
+
+       List<User> tmpUserList = new ArrayList<User>();
+       tmpUserList.add(authenticatedUser.getUser());
+       nGroup.setAdmins(tmpUserList);
+
+
+       //List<Group> tmpGroupList = authenticatedUser.getUser().getGroups();
+       //tmpGroupList.add(nGroup);
+       //authenticatedUser.getUser().setGroups(tmpGroupList);
+
+       //userRepository.save(authenticatedUser.getUser());
+
+       return ResponseEntity.ok(groupRepository.save(nGroup));
+
+       //return ResponseEntity.ok("legalább ez lefut");
    }
+
    
    @PostMapping("/addMember/{id}")//csapathoz adok hozzá
    public ResponseEntity<Group> addMember(@PathVariable int id, @RequestBody User addM){
