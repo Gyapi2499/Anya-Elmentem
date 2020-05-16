@@ -9,7 +9,7 @@
         </div>
 
         <div v-if="successfulNewGroup && !tried" class="col-12">
-          <h1>Csoprt létrehozás sikeres</h1>
+          <h1>Csoport létrehozás sikeres</h1>
         </div>
 
         <form v-if ="!successfulNewGroup || tried" class="row justify-content-center">

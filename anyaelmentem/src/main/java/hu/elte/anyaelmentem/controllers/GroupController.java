@@ -11,8 +11,10 @@ import hu.elte.anyaelmentem.repositories.GroupRepository;
 import hu.elte.anyaelmentem.repositories.UserRepository;
 import hu.elte.anyaelmentem.security.AuthenticatedUser;
 import hu.elte.anyaelmentem.entities.newGroupDTO;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.*;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -49,7 +51,9 @@ public class GroupController {
 
        List<User> myMember= new ArrayList<>();
        for(String s : inGroup.getUsers()){
-           myMember.add(userRepository.findByEmail(s).get());
+           if(!s.equals(authenticatedUser.getUser().getEmail())) {
+               myMember.add(userRepository.findByEmail(s).get());
+           }
        }
 
        Group nGroup= new Group();
@@ -63,16 +67,19 @@ public class GroupController {
 
        List<Group> tmpGroupList = groupRepository.findUserG(authenticatedUser.getUser().getEmail());
        tmpGroupList.add(newGroup);
+       //Set<Group> trgetSet = new HashSet<>(tmpGroupList);
+       //List<Group> trgetList = new ArrayList<>(trgetSet);
        authenticatedUser.getUser().setGroups(tmpGroupList);
 
        userRepository.save(authenticatedUser.getUser());
 
        for(User user : myMember){
-           List<Group> tempGroupList = groupRepository.findUserG(user.getEmail());
-           tempGroupList.add(newGroup);
-           user.setGroups(tempGroupList);
-
-           userRepository.save(user);
+               List<Group> tempGroupList = groupRepository.findUserG(user.getEmail());
+               tempGroupList.add(newGroup);
+               //Set<Group> targetSet = new HashSet<>(tempGroupList);
+               //List<Group> targetList = new ArrayList<>(targetSet);
+               user.setGroups(tempGroupList);
+               userRepository.save(user);
        }
 
        return ResponseEntity.ok(newGroup);
@@ -146,6 +153,7 @@ public class GroupController {
     public ResponseEntity<List<Group>> getGroups(){
         return ResponseEntity.ok(this.authenticatedUser.getUser().getGroups());
     }
+
     @GetMapping("/admingroup")
     public ResponseEntity<List<Group>> getAGroups(){
         List<Group> g = new ArrayList();
