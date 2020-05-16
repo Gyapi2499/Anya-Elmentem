@@ -38,6 +38,20 @@
                 track-by="name"
                 :preselect-first="true">
               </multiselect>
+
+              <h3>Csoport adminok:</h3>
+              <multiselect
+                v-model="value.admins"
+                :options="value.users"
+                :multiple="true"
+                :close-on-select="false"
+                :clear-on-select="false"
+                :preserve-search="true"
+                placeholder="Válaszd ki a csoport adminisztrátorait"
+                label="name"
+                track-by="name"
+                :preselect-first="true">
+              </multiselect>
             </div>
         </form>
 

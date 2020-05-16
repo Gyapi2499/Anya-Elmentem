@@ -11,4 +11,5 @@ import java.util.List;
 @NoArgsConstructor
 public class newGroupDTO {
     List<String> users;
+    List<String> admins;
 }
