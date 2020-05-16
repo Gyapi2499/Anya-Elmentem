@@ -59,16 +59,16 @@ public class GroupController {
        tmpUserList.add(authenticatedUser.getUser());
        nGroup.setAdmins(tmpUserList);
 
+       Group newGroup = groupRepository.save(nGroup);
 
-       //List<Group> tmpGroupList = authenticatedUser.getUser().getGroups();
-       //tmpGroupList.add(nGroup);
-       //authenticatedUser.getUser().setGroups(tmpGroupList);
+       List<Group> tmpGroupList = groupRepository.findUserG(authenticatedUser.getUser().getEmail());
+       tmpGroupList.add(newGroup);
+       authenticatedUser.getUser().setGroups(tmpGroupList);
 
-       //userRepository.save(authenticatedUser.getUser());
+       userRepository.save(authenticatedUser.getUser());
 
-       return ResponseEntity.ok(groupRepository.save(nGroup));
+       return ResponseEntity.ok(newGroup);
 
-       //return ResponseEntity.ok("legalább ez lefut");
    }
 
    

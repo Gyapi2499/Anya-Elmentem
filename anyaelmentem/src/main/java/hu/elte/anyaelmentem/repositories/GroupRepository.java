@@ -22,5 +22,8 @@ public interface GroupRepository extends CrudRepository<Group, Integer> {
     
     @Query("Select g from Group g,User u where u MEMBER g.admins and u.email=:email")
     List <Group> findAdminG(@Param(value="email") String email);
+
+    @Query("Select g from Group g,User u where u MEMBER g.users and u.email=:email")
+    List <Group> findUserG(@Param(value="email") String email);
        
 }
