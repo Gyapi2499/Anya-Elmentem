@@ -5,25 +5,11 @@
     <br>
             <select v-model="selected" :options='group'>
               <option disabled value="" >Please select one</option>
-              <option v-for="i in group" v-bind:key='i' v-bind:value='i'  >{{i}}</option>
+              <option v-for="i in group" v-bind:key='i.id' v-bind:value='i'  >{{i.id}}</option>
             </select >
             <br>
     <br>
     </div>
-    <h2>Feladat nekem</h2>
-    <form id="nekem" Onsubmit="return false">
-        <a>Feladat megnevezése:</a>
-        <br>
-        <input v-model="feladatn" type= "text " name= "title" placeholder="Add todo..."><br>
-        <a> Feladat kezdete:</a>
-        <br>
-        <datetime v-model="kezdetn" type="datetime"  format="yyyy-MM-dd HH:mm:ss"></datetime>
-        <br>
-        <a> Feladat vége:</a>
-        <datetime type="datetime" v-model="vegn" format="yyyy-MM-dd HH:mm:ss"></datetime>
-        <br>
-        <button @click="save()" type="submit"> Mentés </button>
-        </form>
     <div >
       <form id="masnak"  Onsubmit="return false">
         <h2>Feladat másnak:</h2>
@@ -67,16 +53,13 @@ export default {
     }
   },
   methods: {
-    ...mapActions('newTodo', ['getMemberList', 'addTodo', 'getGroup']),
-    save () {
-      this.addTodo({ userId: this.logUser.email, chores: this.feladatn, fromDate: this.kezdetn, toDate: this.vegn, groupId: this.selected, ready: false, token: this.token })
-    },
+    ...mapActions('newTodo', ['getMemberList', 'addtoTodo', 'getAGroups']),
     save2 () {
-      this.addTodo({ userId: this.select.email, chores: this.feladat, fromDate: this.kezdet, toDate: this.veg, groupId: this.selected, ready: false, token: this.token })
+      this.addtoTodo({ userId: this.select.email, chores: this.feladat, fromDate: this.kezdet, toDate: this.veg, groupId: this.selected.id, ready: false, token: this.token })
     }
   },
   created () {
-    this.getGroup({ id: this.logUser.email, token: this.token })
+    this.getAGroups({ id: this.logUser.email, token: this.token })
     this.getMemberList({ id: this.selected, token: this.token })
   },
   computed: {
@@ -87,7 +70,7 @@ export default {
     selected () {
       console.log('sisijsixjknfjhsbghbrfhvbsbdhvbjhsanvjhbfdjgvbhjdbvhwbhvbjhsdbvhbsdbvjsb')
       console.log(this.selected)
-      this.getMemberList({ id: this.selected, token: this.token })
+      this.getMemberList({ id: this.selected.id, token: this.token })
     }
   }
 }
@@ -99,17 +82,5 @@ export default {
     text-align: center;
     padding: 15px
 }
-h2{
-  color:red;
-}
-h1{
-  color:red;
-  text-align:left;
-}
-a{
-  color:white;
-}
-div{
-  background-color: black;
-}
+
 </style>

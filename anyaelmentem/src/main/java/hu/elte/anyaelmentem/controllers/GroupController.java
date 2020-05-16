@@ -138,6 +138,17 @@ public class GroupController {
     public ResponseEntity<List<Group>> getGroups(){
         return ResponseEntity.ok(this.authenticatedUser.getUser().getGroups());
     }
+    @GetMapping("/admingroup")
+    public ResponseEntity<List<Group>> getAGroups(){
+        List<Group> g = new ArrayList();
+        if(authenticatedUser.getUser().getRole()==User.Role.ADMIN ){
+            g=groupRepository.findAll();
+            
+        }else{
+            g=groupRepository.findAdminG(authenticatedUser.getUser().getEmail());
+        }       
+        return ResponseEntity.ok(g);
+    }
     
     
 }
