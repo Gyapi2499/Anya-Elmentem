@@ -10,7 +10,7 @@ export default {
         'Access-Control-Allow-Origin': '*'
       }
     }
-    return axios.post('http://localhost:8080/group/newGroup', groupRequest.memberList, Http)
+    return axios.post('http://localhost:8080/group/newGroup', { users: groupRequest.memberList }, Http)
   },
 
   addMember (memberRequest) {
