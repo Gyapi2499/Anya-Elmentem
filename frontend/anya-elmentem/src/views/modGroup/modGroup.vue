@@ -1,105 +1,124 @@
 <template>
-<div class="modGroup">
-  <h1>Módosítsd a csoportodat!</h1>
-  <br>
-  <br>
-  <h2>Melyik csoportodat szeretnéd módosítani?</h2>
-    <select v-model="selected" :options='group' >
-      <option disabled value="">Válaszd ki a csoportot:</option>
-      <option v-for="i in group" v-bind:key='i' v-bind:value='i'  >{{i}}</option>
-    </select>
-    <br>
+  <div class="addGroup-container">
+    <div class="row justify-content-center">
+      <b-jumbotron class="col-lg-4 col-md-6 col-sm-10">
 
-    <h2>Adj hozzá egy új csoporttagot!</h2>
-    <br>
-    <select v-model="selected" multiple>
-      <option disabled value="" >Válaszd ki, kiket akarsz hozzáadni a csoportodhoz!</option>
-      <option v-for="i in users" v-bind:key='i' v-bind:value='i'  >{{i.email}}</option>
-    </select>
-    <br>
-    <form @submit="submit1()" onsubmit = "return false">
-      <button type="submit">Ember hozzáadása</button>
-    </form>
+        <div class="col-12 title">
+          <h1>Csoport módosítás</h1>
+          <hr class="my-4">
+        </div>
 
-      <h2>Törölj egy csoporttagot!</h2>
-      <br>
-    <select v-model="selected" multiple>
-      <option disabled value="">Válaszd ki, kit szeretnél törölni!</option>
-      <option v-for="i in members" v-bind:key='i' v-bind:value='i'  >{{i.email}}</option>
-    </select>
-    <br>
-    <form @submit="submit2()" onsubmit = "return false">
-      <button type="submit">Ember törlése</button>
-    </form>
+        <form class="row justify-content-center">
+            <div>
+              <h3>Melyik csoportodat szeretnéd módosítani?</h3>
 
-    <h2>Adj másnak is admmin jogot!</h2>
-    <br>
-    <select name="" id="" multiple>
-      <option disabled value="">Válaszd ki, kinek akarsz admin jogot adni!</option>
-       <option>...</option>
-    </select>
-        <form @submit="submit3()" onsubmit = "return false">
-      <button type="submit">Felruházás admin joggal</button>
-    </form>
-    <br>
-    <h2>AVedd el valaki admin jogát!</h2>
-    <br>
-    <select name="" id="" multiple>
-      <option disabled value="">Válaszd ki, kinek az admin jogát akarod elvenni!</option>
-      <option>...</option>
-    </select>
-    <form @submit="submit4()" onsubmit = "return false">
-      <button type="submit">Admin jog elvétele</button>
-    </form>
-</div>
+              <multiselect
+                v-model="value"
+                deselect-label="Can't remove this value"
+                track-by="id"
+                label="id"
+                placeholder="Válassz csoportot"
+                :options="group"
+                :searchable="false"
+                :allow-empty="false">
+              </multiselect>
+            </div>
+
+            <div v-if="value" class="col-12">
+              <h3>Csoport tagok:</h3>
+                <multiselect
+                v-model="value.users"
+                :options="users"
+                :multiple="true"
+                :close-on-select="false"
+                :clear-on-select="false"
+                :preserve-search="true"
+                placeholder="Válaszd ki a csoport tagjait"
+                label="name"
+                track-by="name"
+                :preselect-first="true">
+              </multiselect>
+
+              <h3>Csoport adminok:</h3>
+              <multiselect
+                v-model="value.admins"
+                :options="value.users"
+                :multiple="true"
+                :close-on-select="false"
+                :clear-on-select="false"
+                :preserve-search="true"
+                placeholder="Válaszd ki a csoport adminisztrátorait"
+                label="name"
+                track-by="name"
+                :preselect-first="true">
+              </multiselect>
+            </div>
+
+          <div class="col-md-5 col-sm-8 ">
+            <b-button variant="success" @click="sendModifyGroup()">Módosítás</b-button>
+          </div>
+        </form>
+
+      </b-jumbotron>
+    </div>
+  </div>
 </template>
 
 <script>
+import Multiselect from 'vue-multiselect'
 import { mapActions, mapState } from 'vuex'
+
 export default {
-  name: 'modGroup',
-
-  computed: {
-    ...mapState(['token']),
-    ...mapState('modGroup', ['group', 'users', 'members', 'admins'])
+  components: {
+    Multiselect
   },
-
-  methods: {
-    ...mapActions('modGroup', ['getGroup', 'getUsers', 'addMembers', 'delMembers', 'addAdmin', 'delAdmin']),
-    submit1 () {
-      this.addMembers({ token: this.token, memberList: this.selected })
-    },
-    submit2 () {
-      this.delMembers({ token: this.token, memberList: this.selected })
-    },
-    submit3 () {
-      this.addAdmin({ token: this.token, adminList: this.selected })
-    },
-    submit4 () {
-      this.delAdmin({ token: this.token, adminList: this.selected })
-    }
-  },
-
   data () {
     return {
-      selected: []
-      // select: ''
+      value: '',
+      groupMembers: []
     }
   },
   created () {
-    this.getGroup({ token: this.token })
+    this.getAGroups({ id: this.logUser.email, token: this.token })
     this.getUsers({ token: this.token })
-    this.addMembers({ token: this.token })
-    this.delMembers({ token: this.token })
-    this.addAdmin({ token: this.token })
-    this.delAdmin({ token: this.token })
   },
-
+  computed: {
+    ...mapState(['logUser', 'token']),
+    ...mapState('newTodo', ['group']),
+    ...mapState('addGroup', ['users']),
+    ...mapState('modGroup', ['modGroup'])
+  },
+  methods: {
+    ...mapActions('newTodo', ['getAGroups']),
+    ...mapActions('addGroup', ['getUsers']),
+    ...mapActions('modGroup', ['modifyGroup']),
+    sendModifyGroup () {
+      var userList = []
+      var adminList = []
+      var i
+      for (i = 0; i < this.value.users.length; i++) {
+        userList.push(this.value.users[i].email)
+      }
+      for (i = 0; i < this.value.admins.length; i++) {
+        adminList.push(this.value.admins[i].email)
+      }
+      this.modifyGroup({ token: this.token, id: this.value.id, memberList: userList, adminList: adminList })
+    }
+  },
   watch: {
-    selected () {
-      this.getGroup({ id: this.selected, token: this.token })
-      // this.getUsers({ id: this.selected, token: this.token })
+    modGroup () {
+      console.log('Íme:')
+      console.log(this.modGroup)
     }
   }
 }
 </script>
+
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
+
+<style scoped>
+.btn{
+  width: 100%;
+  margin-top: 15px;
+}
+</style>

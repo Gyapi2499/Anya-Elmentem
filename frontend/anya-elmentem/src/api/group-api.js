@@ -13,6 +13,23 @@ export default {
     return axios.post('http://localhost:8080/group/newGroup', { users: groupRequest.memberList }, Http)
   },
 
+  modifyGroup (groupRequest) {
+    console.log('Itt vagyok ebben a csodában')
+    console.log(groupRequest.memberList)
+    console.log(groupRequest.adminList)
+    const Http = {
+      headers: {
+        Authorization: `Basic ${groupRequest.token}`,
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      }
+    }
+    return axios.post(`http://localhost:8080/group/modifyGroup/${groupRequest.id}`, {
+      users: groupRequest.memberList,
+      admins: groupRequest.adminList
+    }, Http)
+  },
+
   addMember (memberRequest) {
     const Http = {
       headers: {

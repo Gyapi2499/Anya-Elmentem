@@ -7,7 +7,6 @@ import newTodo from '../views/newTodo/newTodo.vue'
 import newMyTodo from '../views/newMyTodo/newMyTodo.vue'
 import Signup from '../views/registration/registration.vue'
 import Login from '../views/login/login.vue'
-import ModCsop from '../views/modGroupm/modGroupm.vue'
 
 Vue.use(VueRouter)
 
@@ -57,13 +56,6 @@ const routes = [
     name: 'login',
     components: {
       default: Login
-    }
-  },
-  {
-    path: '/modCsop',
-    name: 'modcsop',
-    components: {
-      default: ModCsop
     }
   }
 ]
