@@ -27,7 +27,7 @@
         <br>
         <select v-model="select"  >
           <option disabled value="">Please select one</option>
-          <option v-for="cat in memberList" v-bind:key='cat' v-bind:value='cat'>{{cat.name}}</option>
+          <option v-for="cat in memberList" v-bind:key='cat.email' v-bind:value='cat'>{{cat.name}}</option>
         </select>
         <br>
         <button @click="save2()" type="submit"> Mentés </button>

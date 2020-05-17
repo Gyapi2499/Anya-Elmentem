@@ -3,6 +3,8 @@ import Vuex from 'vuex'
 import addGroup from '../views/addGroup/addGroup'
 import modGroup from '../views/modGroup/modGroup'
 import newTodo from '../views/newTodo/newTodo'
+import myTodos from '../views/myTodos/myTodos'
+import groupTodos from '../views/groupTodos/groupTodos'
 import newMyTodo from '../views/newMyTodo/newMyTodo'
 import Registration from '../views/registration/registration.js'
 import api from '../api/user-api.js'
@@ -49,6 +51,8 @@ export default new Vuex.Store({
     newTodo,
     newMyTodo,
     Registration,
+    myTodos,
+    groupTodos,
     home
   }
 })
