@@ -35,6 +35,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -87,7 +88,7 @@ public class ControllerTest {
     void auth() throws Exception{
         //mockMvc.perform(post("/users/login").header("Access-Control-Allow-Origin", "*").header("Authorization" , "Basic "+encoded).contentType("application/json"));
     }
-    
+    @WithMockUser("user")
     @Test
     void whenValidInput_thenReturns200() throws Exception {
         if(test){
@@ -96,6 +97,7 @@ public class ControllerTest {
             mockMvc.perform(get("/chores/allChores").header("Access-Control-Allow-Origin", "*").header("Authorization" , "Basic "+encoded).contentType("application/json")).andExpect(status().is(401));
         }
     }
+    @WithMockUser("user")
     @Test
     void usersTest() throws Exception {
         if(test){
@@ -106,7 +108,7 @@ public class ControllerTest {
     }
      
     
-    
+    @WithMockUser("user")
     @Test
     void whenValidInput_thenReturnsUserResource() throws Exception {
         Chore choress = new Chore("asd");
@@ -120,7 +122,7 @@ public class ControllerTest {
 
         assertThat(objectMapper.writeValueAsString(chore)).isEqualToIgnoringWhitespace(actualResponseBody);
     }
-    
+    @WithMockUser("user")
     @Test
     void whenValidInput_thenMapsToBusinessModel() throws Exception {
       Chore chore = new Chore("asd");
@@ -130,7 +132,7 @@ public class ControllerTest {
       verify(choreRepository, times(1)).save(choreCaptor.capture());
       assertThat(choreCaptor.getValue().getName()).isEqualTo(chore.getName());
     }
-    
+    @WithMockUser("user")
     @Test
     void newGroupTest() throws Exception{
         User u1= new User("bori","bori@bori.hu","asd",User.Role.ADMIN,null);
@@ -155,6 +157,7 @@ public class ControllerTest {
         
         
     }
+    @WithMockUser("user")
     @ Test
     void registerTest() throws Exception{
         RegisterDTO u1= new RegisterDTO("Bori","bori@bori.hu","pingvin"); 
@@ -185,7 +188,7 @@ public class ControllerTest {
 
     
     }*/
-    
+    @WithMockUser("user")
     @Test
     void readyOrNotTest() throws Exception {
         ToDo todos = new ToDo(1, "asd@asd.hu", "mosogatas", LocalDateTime.now(), LocalDateTime.now(), 1, false);
@@ -197,7 +200,7 @@ public class ControllerTest {
          verify(toDoRepository, times(1)).save(todoCaptor.capture());
          assertThat(todoCaptor.getValue().getReady()).isEqualTo(true);       
     }
-    
+    @WithMockUser("user")
     @Test
     void getMemberListTest() throws Exception {
         if(test){
@@ -219,7 +222,7 @@ public class ControllerTest {
             mockMvc.perform(get("/group/getMemberList/1")).andExpect(status().is(401));
         }
     }   
-    
+    @WithMockUser("user")
     @Test
     void getWeekTest() throws Exception {
         if(test){
