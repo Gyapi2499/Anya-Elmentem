@@ -3,15 +3,12 @@ matrix:
         -language: node_js
         node_js:
          - "node"
-
         cache: npm
-
         before_install: cd frontend/anya-elmentem
-
         install: npm install
-            
         script: npm run build
         -language: java
+        jdk: oraclejdk15
         script:anyaelmentem/target/anyaelmentem-0.0.1-SNAPSHOT.jar
 deploy:
  provider: pages
