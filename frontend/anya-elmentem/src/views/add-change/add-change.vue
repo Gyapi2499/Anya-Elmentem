@@ -20,6 +20,7 @@
           <option disabled value="" >Please select one</option>
           <option v-for="i in otherTodos" v-bind:key='i.id' v-bind:value='i'  >{{i}}</option>
         </select >
+    <br>
     <b-button @click="submit()">Submit</b-button>
 </div>
 </template>
