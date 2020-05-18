@@ -4,9 +4,8 @@ node_js:
 
 cache: npm
 
-script:
-    -cd frontend/anya-elmentem 
-    -npm run build
+before_script: cd frontend/anya-elmentem
+script: npm run build
 
 deploy:
  provider: pages
