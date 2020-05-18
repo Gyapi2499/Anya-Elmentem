@@ -6,12 +6,13 @@ matrix:
         cache: npm
         before_install: cd frontend/anya-elmentem
         install: npm install
-        script: npm run build
+        script: 
+            - npm run build
         - language: java
         jdk: oraclejdk15
         script: 
-            -jar -xf anyaelmentem/target/anyaelmentem-0.0.1-SNAPSHOT.jar
-            -java org.springframework.boot.loader.JarLauncher
+            - jar -xf anyaelmentem/target/anyaelmentem-0.0.1-SNAPSHOT.jar
+            - java org.springframework.boot.loader.JarLauncher
 deploy:
  provider: pages
  skip_cleanup: true
