@@ -10,7 +10,7 @@ import 'vue-datetime/dist/vue-datetime.css'
 
 Vue.use(Datetime)
 
-Vue.config.productionTip = false
+Vue.config.productionTip = true
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 
