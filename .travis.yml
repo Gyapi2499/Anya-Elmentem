@@ -4,7 +4,7 @@ node_js:
 
 cache: npm
 
-before_script: cd frontend/anya-elmentem
+before_script: cd frontend\anya-elmentem
 
 script: npm run build
 
