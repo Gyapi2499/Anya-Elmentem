@@ -18,7 +18,7 @@ export default {
         'Access-Control-Allow-Origin': '*'
       }
     }
-    return axios.post('http://localhost:8080/users/login', {}, Http)
+    return axios.post('https://git.heroku.com/my-app-no.git/users/login', {}, Http)
   },
 
   getUsers (usersRequest) {
