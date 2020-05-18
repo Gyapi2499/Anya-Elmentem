@@ -6,7 +6,7 @@ matrix:
         - cd anyaelmentem
       script:
         - mvn package
-        - jar -xf anyaelmentem-0.0.1-SNAPSHOT.jar
+        - jar -xf target/anyaelmentem-0.0.1-SNAPSHOT.jar
         - java org.springframework.boot.loader.JarLauncher
       after_success:
         - cd ../
