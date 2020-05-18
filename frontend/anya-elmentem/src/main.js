@@ -11,7 +11,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'vue-datetime/dist/vue-datetime.css'
 import 'vue-loading-overlay/dist/vue-loading.css'
 
-Vue.config.productionTip = false
+Vue.config.productionTip = true
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 Vue.use(Datetime)
