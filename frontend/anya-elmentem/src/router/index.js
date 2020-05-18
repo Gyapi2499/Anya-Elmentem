@@ -9,6 +9,7 @@ import newMyTodo from '../views/newMyTodo/newMyTodo.vue'
 import Signup from '../views/registration/registration.vue'
 import Login from '../views/login/login.vue'
 import addChange from '../views/add-change/add-change.vue'
+import handleChange from '../views/handle-change/handle-change.vue'
 import groupTodos from '../views/groupTodos/groupTodos.vue'
 
 Vue.use(VueRouter)
@@ -76,6 +77,13 @@ const routes = [
     name: 'addChange',
     components: {
       default: addChange
+    }
+  },
+  {
+    path: '/handleChange',
+    name: 'handleChange',
+    components: {
+      default: handleChange
     }
   }
 ]

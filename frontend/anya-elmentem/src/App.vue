@@ -8,6 +8,8 @@
       <router-link to="/modGroup">Csoport módosítása</router-link>|
       <router-link to="/newTodo">Új feladat másnak</router-link>|
       <router-link to="/newMyTodo">Új feladat nekem</router-link>|
+      <router-link to="/addChange">Csere</router-link>|
+      <router-link to="/handleChange">Cserék kezelése</router-link>|
       <router-link to="/signup">Regisztráció</router-link>|
       <router-link to="/login">Login</router-link>
       <b-button variant="secondary" @click="doLogout()"><b-icon-box-arrow-in-right></b-icon-box-arrow-in-right></b-button>
