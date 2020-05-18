@@ -20,5 +20,8 @@ export default {
   },
   addtoTodo (commit, params) {
     return todoApi.addto(params)
+  },
+  nullGroup: ({ commit }) => {
+    commit('setNullGroup')
   }
 }

@@ -25,8 +25,10 @@ import router from './router/index.js'
 export default {
   methods: {
     ...mapActions(['logout']),
+    ...mapActions('newTodo', ['nullGroup']),
     doLogout () {
       this.logout()
+      this.nullGroup()
       router.push({ path: '/' })
     }
   }
