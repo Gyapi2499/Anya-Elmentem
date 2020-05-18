@@ -1,14 +1,15 @@
-language: node_js
-node_js:
- - "node"
-
-cache: npm
-
-before_install: cd frontend/anya-elmentem
-
-install: npm install
-    
-script: npm run build
+matrix:
+  include:
+    - language: node_js
+        node_js:
+         - "node"
+        cache: npm
+        before_install: cd frontend/anya-elmentem
+        install: npm install
+        script: npm run build
+    - language: java
+        install: mvn clean verify
+        script: java anyaelmentem/target/anyaelmentem-0.0.1-SNAPSHOT.jar
 
 deploy:
  provider: pages
@@ -17,4 +18,3 @@ deploy:
  local_dir: frontend/anya-elmentem/dist
  on:
    branch: master
-   
