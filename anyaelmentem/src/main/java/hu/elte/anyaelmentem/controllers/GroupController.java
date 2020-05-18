@@ -146,7 +146,9 @@ public class GroupController {
     
     @GetMapping("/groupss")
     public ResponseEntity<List<Group>> getGroups(){
-        return ResponseEntity.ok(this.authenticatedUser.getUser().getGroups());
+        List<Group> groups = groupRepository.findUserG(this.authenticatedUser.getUser().getEmail());
+        groups.addAll(groupRepository.findAdminG(this.authenticatedUser.getUser().getEmail()));
+        return ResponseEntity.ok(groups);
     }
 
     @GetMapping("/admingroup")

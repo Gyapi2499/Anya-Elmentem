@@ -118,5 +118,15 @@ export default {
       }
     }
     return axios.get('http://localhost:8080/group/admingroup', Http)
+  },
+  getGroups (usersRequest) {
+    const Http = {
+      headers: {
+        Authorization: `Basic ${usersRequest.token}`,
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      }
+    }
+    return axios.get('http://localhost:8080/group/groupss', Http)
   }
 }

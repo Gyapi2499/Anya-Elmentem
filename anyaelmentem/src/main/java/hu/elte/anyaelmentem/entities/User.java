@@ -8,6 +8,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -36,7 +37,6 @@ public class User {
     @ManyToMany
     @JsonIgnore
     private List<Group> groups;
-    
     
     public enum Role{
         ADMIN,USER
