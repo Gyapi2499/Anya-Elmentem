@@ -1,1 +1,3 @@
-mvn package
+#!/bin/sh 
+
+eval "mvn package"
