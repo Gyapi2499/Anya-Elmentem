@@ -1,12 +1,12 @@
 language: node_js
-  node_js:
-    - "node"
-  before_install:
-    - cd frontend/anya-elmentem
-  install:
-    - npm install
-  script:
-    - npm run build
+node_js:
+- "node"
+before_install:
+- cd frontend/anya-elmentem
+install:
+- npm install
+script:
+- npm run build
 deploy:
   provider: pages
   skip_cleanup: true
