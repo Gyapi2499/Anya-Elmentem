@@ -1,15 +1,18 @@
-language: node_js
-node_js:
- - "node"
+matrix:
+    include:
+        -language: node_js
+        node_js:
+         - "node"
 
-cache: npm
+        cache: npm
 
-before_install: cd frontend/anya-elmentem
+        before_install: cd frontend/anya-elmentem
 
-install: npm install
-    
-script: npm run build
-
+        install: npm install
+            
+        script: npm run build
+        -language: java
+        jdk: oraclejdk8
 deploy:
  provider: pages
  skip_cleanup: true
