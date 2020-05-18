@@ -14,7 +14,7 @@ deploy:
  provider: pages
  skip_cleanup: true
  github_token: $GITHUB_TOKEN
- local_dir: /frontend/anya-elmentem/dist
+ local_dir: frontend/anya-elmentem/dist
  on:
    branch: master
    
