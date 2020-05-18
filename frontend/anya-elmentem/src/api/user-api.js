@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export default {
   register (userRequest) {
-    return axios.post('http://localhost:8080/users/users/register', {
+    return axios.post('https://my-app-no.herokuapp.com/users/register', {
       username: userRequest.name,
       email: userRequest.email,
       password: userRequest.password
