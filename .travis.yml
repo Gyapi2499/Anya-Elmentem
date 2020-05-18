@@ -8,13 +8,15 @@ matrix:
         install: npm install
         script: npm run build
     - language: java
-        script: mvn clean verify
-
-    deploy:
-        provider: pages
-        skip_cleanup: true
-        github_token: $GITHUB_TOKEN
-        local_dir: frontend/anya-elmentem/dist
-        file: "anyaelmentem/target/anyaelmentem-0.0.1-SNAPSHOT.jar"
-        on:
-        branch: master
+        script: 
+            - mvn clean test
+            - mvn package
+            - mvn verify
+deploy:
+    provider: pages
+    skip_cleanup: true
+    github_token: $GITHUB_TOKEN
+    local_dir: frontend/anya-elmentem/dist
+    file: "anyaelmentem/target/anyaelmentem-0.0.1-SNAPSHOT.jar"
+    on:
+    branch: master
