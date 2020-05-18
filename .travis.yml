@@ -6,9 +6,9 @@ matrix:
         - cd anyaelmentem
       script:
         - mvn package
+      after_success:
         - jar -xf target/anyaelmentem-0.0.1-SNAPSHOT.jar
         - java org.springframework.boot.loader.JarLauncher
-      after_success:
         - cd ../
     - language: node_js
       node_js:
