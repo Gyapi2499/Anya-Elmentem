@@ -11,7 +11,7 @@
       <input type="checkbox"  @click="save()">
     </div>
     <div v-else-if="this.select.ready === true">
-      Ezt a feladatot már elvégzeted
+      Ezt a feladatot már elvégezted
     </div>
   </div>
 </template>
