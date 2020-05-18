@@ -2,9 +2,9 @@
     <div>
         <p> {{change.user1.email}} </p>
         <p> from: {{change.todo1.fromDate}} to: {{change.todo1.toDate}}</p>
-        <p> {{change.todo1.chore}} </p>
+        <p> {{change.todo1.chores}} </p>
         <p> from: {{change.todo2.fromDate}} to: {{change.todo2.toDate}}</p>
-        <p> {{change.todo2.chore}} </p>
+        <p> {{change.todo2.chores}} </p>
         <img src="../../assets/img_254317.png" @click="deleteThis()">
         <img src="../../assets/accept.png" @click="acceptThis()">
     </div>
