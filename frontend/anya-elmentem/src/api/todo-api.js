@@ -10,7 +10,7 @@ export default {
         'Access-Control-Allow-Origin': '*'
       }
     }
-    return axios.post('http://localhost:8080/todo/add', {
+    return axios.post('https://my-app-no.herokuapp.com/todo/add', {
       userId: todoRequest.userId,
       chores: todoRequest.chores,
       fromDate: todoRequest.fromDate,
@@ -27,7 +27,7 @@ export default {
         'Access-Control-Allow-Origin': '*'
       }
     }
-    return axios.post('http://localhost:8080/todo/addto', {
+    return axios.post('https://my-app-no.herokuapp.com/todo/addto', {
       userId: todoRequest.userId,
       chores: todoRequest.chores,
       fromDate: todoRequest.fromDate,
@@ -45,7 +45,7 @@ export default {
         'Access-Control-Allow-Origin': '*'
       }
     }
-    return axios.get(`http://localhost:8080/todo/getWeek/${weekRequest.userId}`, Http)
+    return axios.get(`https://my-app-no.herokuapp.com/todo/getWeek/${weekRequest.userId}`, Http)
   },
 
   readyOrNot (readyOrNotRequest) {
@@ -56,7 +56,7 @@ export default {
         'Access-Control-Allow-Origin': '*'
       }
     }
-    return axios.post(`http://localhost:8080/todo/readyOrNot/${readyOrNotRequest.id}`, {}, Http)
+    return axios.post(`https://my-app-no.herokuapp.com/todo/readyOrNot/${readyOrNotRequest.id}`, {}, Http)
   },
 
   deleteTodo (deleteRequest) {
@@ -67,7 +67,7 @@ export default {
         'Access-Control-Allow-Origin': '*'
       }
     }
-    return axios.delete(`http://localhost:8080/todo/delete/${deleteRequest.id}`, Http)
+    return axios.delete(`https://my-app-no.herokuapp.com/todo/delete/${deleteRequest.id}`, Http)
   },
 
   getAll (request) {
@@ -78,7 +78,7 @@ export default {
         'Access-Control-Allow-Origin': '*'
       }
     }
-    return axios.get(`http://localhost:8080/todo/toDos/${request.email}`, Http)
+    return axios.get(`https://my-app-no.herokuapp.com/todo/toDos/${request.email}`, Http)
   }
 
 }

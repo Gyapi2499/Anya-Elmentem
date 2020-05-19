@@ -10,7 +10,7 @@ export default {
         'Access-Control-Allow-Origin': '*'
       }
     }
-    return axios.post('http://localhost:8080/group/newGroup', { users: groupRequest.memberList }, Http)
+    return axios.post('https://my-app-no.herokuapp.com/group/newGroup', { users: groupRequest.memberList }, Http)
   },
 
   modifyGroup (groupRequest) {
@@ -24,7 +24,7 @@ export default {
         'Access-Control-Allow-Origin': '*'
       }
     }
-    return axios.post(`http://localhost:8080/group/modifyGroup/${groupRequest.id}`, {
+    return axios.post(`https://my-app-no.herokuapp.com/group/modifyGroup/${groupRequest.id}`, {
       users: groupRequest.memberList,
       admins: groupRequest.adminList
     }, Http)
@@ -38,7 +38,7 @@ export default {
         'Access-Control-Allow-Origin': '*'
       }
     }
-    return axios.post(`http://localhost:8080/group/addMember/${memberRequest.id}`, {
+    return axios.post(`https://my-app-no.herokuapp.com/group/addMember/${memberRequest.id}`, {
       name: memberRequest.name,
       email: memberRequest.email,
       role: memberRequest.role,
@@ -54,7 +54,7 @@ export default {
         'Access-Control-Allow-Origin': '*'
       }
     }
-    return axios.post(`http://localhost:8080/group/shareAdmin/${adminRequest.id}`, {
+    return axios.post(`https://my-app-no.herokuapp.com/group/shareAdmin/${adminRequest.id}`, {
       user: adminRequest.users
     }, Http)
   },
@@ -67,7 +67,7 @@ export default {
         'Access-Control-Allow-Origin': '*'
       }
     }
-    return axios.post(`http://localhost:8080/group/takeAdmin/${adminRequest.id}`, {
+    return axios.post(`https://my-app-no.herokuapp.com/group/takeAdmin/${adminRequest.id}`, {
       user: adminRequest.users
     }, Http)
   },
@@ -80,7 +80,7 @@ export default {
         'Access-Control-Allow-Origin': '*'
       }
     }
-    return axios.delete(`http://localhost:8080/group/deleteGroup/${deleteRequest.id}`, Http)
+    return axios.delete(`https://my-app-no.herokuapp.com/group/deleteGroup/${deleteRequest.id}`, Http)
   },
 
   deleteMember (deleteRequest) {
@@ -91,7 +91,7 @@ export default {
         'Access-Control-Allow-Origin': '*'
       }
     }
-    return axios.post(`http://localhost:8080/group/deleteMember/${deleteRequest.id}`, {
+    return axios.post(`https://my-app-no.herokuapp.com/group/deleteMember/${deleteRequest.id}`, {
       name: deleteRequest.name,
       email: deleteRequest.email,
       role: deleteRequest.role,
@@ -107,7 +107,7 @@ export default {
         'Access-Control-Allow-Origin': '*'
       }
     }
-    return axios.get(`http://localhost:8080/group/getMemberList/${listRequest.id}`, Http)
+    return axios.get(`https://my-app-no.herokuapp.com/group/getMemberList/${listRequest.id}`, Http)
   },
   getAGroups (usersRequest) {
     const Http = {
@@ -117,7 +117,7 @@ export default {
         'Access-Control-Allow-Origin': '*'
       }
     }
-    return axios.get('http://localhost:8080/group/admingroup', Http)
+    return axios.get('https://my-app-no.herokuapp.com/group/admingroup', Http)
   },
   getGroups (usersRequest) {
     const Http = {
@@ -127,6 +127,6 @@ export default {
         'Access-Control-Allow-Origin': '*'
       }
     }
-    return axios.get('http://localhost:8080/group/groupss', Http)
+    return axios.get('https://my-app-no.herokuapp.com/group/groupss', Http)
   }
 }

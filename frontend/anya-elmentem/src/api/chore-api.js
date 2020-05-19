@@ -10,7 +10,7 @@ export default {
         'Access-Control-Allow-Origin': '*'
       }
     }
-    return axios.post(`http://localhost:8080/chores/newChore/${choreRequest.id}`, {}, Http)
+    return axios.post(`https://my-app-no.herokuapp.com/chores/newChore/${choreRequest.id}`, {}, Http)
   },
 
   allChores (choresRequest) {
@@ -21,7 +21,7 @@ export default {
         'Access-Control-Allow-Origin': '*'
       }
     }
-    return axios.get('http://localhost:8080/chores/allChores', Http)
+    return axios.get('https://my-app-no.herokuapp.com/chores/allChores', Http)
   },
 
   deleteChore (deleteRequest) {
@@ -32,6 +32,6 @@ export default {
         'Access-Control-Allow-Origin': '*'
       }
     }
-    return axios.delete(`http://localhost:8080/chores/deleteChore/${deleteRequest.id}`, Http)
+    return axios.delete(`https://my-app-no.herokuapp.com/chores/deleteChore/${deleteRequest.id}`, Http)
   }
 }

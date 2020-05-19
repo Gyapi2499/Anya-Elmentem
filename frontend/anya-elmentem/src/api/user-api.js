@@ -30,7 +30,7 @@ export default {
         'Access-Control-Allow-Origin': '*'
       }
     }
-    return axios.get('http://localhost:8080/users/users', Http)
+    return axios.get('https://my-app-no.herokuapp.com/users/users', Http)
   },
   getGroup (usersRequest) {
     const Http = {
@@ -40,6 +40,6 @@ export default {
         'Access-Control-Allow-Origin': '*'
       }
     }
-    return axios.get(`http://localhost:8080/users/groups/${usersRequest.id}`, Http)
+    return axios.get(`https://my-app-no.herokuapp.com/users/groups/${usersRequest.id}`, Http)
   }
 }

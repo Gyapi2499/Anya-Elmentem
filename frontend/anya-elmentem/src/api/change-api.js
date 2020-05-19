@@ -9,7 +9,7 @@ export default {
         'Access-Control-Allow-Origin': '*'
       }
     }
-    return axios.post('http://localhost:8080/change/add', changeRequest.change, Http)
+    return axios.post('https://my-app-no.herokuapp.com/change/add', changeRequest.change, Http)
   },
   getChange (changeRequest) {
     const Http = {
@@ -19,7 +19,7 @@ export default {
         'Access-Control-Allow-Origin': '*'
       }
     }
-    return axios.get('http://localhost:8080/change/getAll', Http)
+    return axios.get('https://my-app-no.herokuapp.com/change/getAll', Http)
   },
   accept (changeRequest) {
     const Http = {
@@ -29,7 +29,7 @@ export default {
         'Access-Control-Allow-Origin': '*'
       }
     }
-    return axios.post(`http://localhost:8080/change/accept/${changeRequest.id}`, {}, Http)
+    return axios.post(`https://my-app-no.herokuapp.com/change/accept/${changeRequest.id}`, {}, Http)
   },
   decline (changeRequest) {
     const Http = {
@@ -39,6 +39,6 @@ export default {
         'Access-Control-Allow-Origin': '*'
       }
     }
-    return axios.post(`http://localhost:8080/change/decline/${changeRequest.id}`, {}, Http)
+    return axios.post(`https://my-app-no.herokuapp.com/change/decline/${changeRequest.id}`, {}, Http)
   }
 }

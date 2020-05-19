@@ -12,6 +12,7 @@ import hu.elte.anyaelmentem.entities.Group;
 import hu.elte.anyaelmentem.entities.RegisterDTO;
 import hu.elte.anyaelmentem.entities.User;
 import hu.elte.anyaelmentem.entities.User.Role;
+import hu.elte.anyaelmentem.repositories.ChangeRepository;
 import hu.elte.anyaelmentem.repositories.ChoreRepository;
 import hu.elte.anyaelmentem.repositories.GroupRepository;
 import hu.elte.anyaelmentem.repositories.ToDoRepository;
@@ -63,6 +64,9 @@ public class ControllerTest {
     
     @MockBean
     GroupRepository groupRepository;
+    
+    @MockBean
+    ChangeRepository changeRepository;
     
     @MockBean
     UserRepository userRepository;
@@ -132,7 +136,7 @@ public class ControllerTest {
       verify(choreRepository, times(1)).save(choreCaptor.capture());
       assertThat(choreCaptor.getValue().getName()).isEqualTo(chore.getName());
     }
-    @WithMockUser("user")
+    /*@WithMockUser("user")
     @Test
     void newGroupTest() throws Exception{
         User u1= new User("bori","bori@bori.hu","asd",User.Role.ADMIN,null);
@@ -203,7 +207,6 @@ public class ControllerTest {
     @WithMockUser("user")
     @Test
     void getMemberListTest() throws Exception {
-        if(test){
         User u1= new User("bori","bori@bori.hu","pingvin",User.Role.ADMIN,null);        
         User u2= new User("andris","andris@bori.hu","jegesmaci",User.Role.ADMIN,null);
         List<User> ulist= new ArrayList<>();
@@ -218,24 +221,17 @@ public class ControllerTest {
         Group g = new Group(1,new ArrayList<User>(),ulist);
        
             mockMvc.perform(get("/group/getMemberList/1").contentType("application/json")).andExpect(status().is(200));
-        }else{
-            mockMvc.perform(get("/group/getMemberList/1")).andExpect(status().is(401));
-        }
     }   
     @WithMockUser("user")
     @Test
     void getWeekTest() throws Exception {
-        if(test){
             ToDo todos = new ToDo(1, "asd@asd.hu", "mosogatas", LocalDateTime.now(), LocalDateTime.now(), 1, false);
             List<ToDo> ltd= new ArrayList();
             ltd.add(todos);
             when(toDoRepository.findAllByUserId("asd@asd.hu")).thenReturn(Optional.of(ltd));
             ToDo todo = new ToDo(1, "asd@asd.hu", "mosogatas", LocalDateTime.now(), LocalDateTime.now(), 1, false);
 
-            mockMvc.perform(get("/todo/getWeek/asd@asd.hu").contentType("application/json")).andExpect(status().is(200));
-        }else{
-            mockMvc.perform(get("/todo/getWeek/asd@asd.hu")).andExpect(status().is(401));
-        }        
+            mockMvc.perform(get("/todo/getWeek/asd@asd.hu").contentType("application/json")).andExpect(status().is(200));   
     }
       
 }
