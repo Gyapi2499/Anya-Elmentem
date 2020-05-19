@@ -2,6 +2,13 @@ import apiGroup from '../../../api/group-api'
 import apiUser from '../../../api/user-api'
 
 export default {
+  modifyGroup: ({ commit }, groupRequest) => {
+    apiGroup.modifyGroup(groupRequest).then((response) => {
+      commit('setModGroup', response.data)
+    }).catch((error) => {
+      console.error('Nem sikerült a módosítás', { error })
+    })
+  },
   getGroup ({ commit }, params) {
     apiGroup.getGroup(params).then(response => {
       commit('setGroup', response.data)

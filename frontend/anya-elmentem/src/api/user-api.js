@@ -11,6 +11,7 @@ export default {
 
   login (loginRequest) {
     const token = btoa(`${loginRequest.email}:${loginRequest.password}`)
+    console.log(token)
     const Http = {
       headers: {
         Authorization: `Basic ${token}`,

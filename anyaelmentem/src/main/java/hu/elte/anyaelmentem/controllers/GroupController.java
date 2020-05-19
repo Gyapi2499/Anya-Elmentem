@@ -8,9 +8,12 @@ package hu.elte.anyaelmentem.controllers;
 import hu.elte.anyaelmentem.entities.Group;
 import hu.elte.anyaelmentem.entities.User;
 import hu.elte.anyaelmentem.repositories.GroupRepository;
+import hu.elte.anyaelmentem.repositories.UserRepository;
 import hu.elte.anyaelmentem.security.AuthenticatedUser;
-import java.util.ArrayList;
-import java.util.List;
+import hu.elte.anyaelmentem.entities.newGroupDTO;
+
+import java.util.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -34,19 +37,50 @@ public class GroupController {
     @Autowired
     private GroupRepository groupRepository;
     
+    @Autowired
+    private UserRepository userRepository;
+    
     
    
     /**    
     * uj csapat 
     */
    @PostMapping("/newGroup")
-   public ResponseEntity<Group> newGroup(@RequestBody List<User> myMember){
+   public ResponseEntity<?> newGroup(@RequestBody newGroupDTO inGroup){
+
+       List<User> myMember= new ArrayList<>();
+       for(String s : inGroup.getUsers()){
+           if(!s.equals(authenticatedUser.getUser().getEmail())) {
+               myMember.add(userRepository.findByEmail(s).get());
+           }
+       }
+
        Group nGroup= new Group();
-       nGroup.setAdmins(new ArrayList<User>());
        nGroup.setUsers(myMember);
-       nGroup.getAdmins().add(authenticatedUser.getUser());
-       return ResponseEntity.ok(groupRepository.save(nGroup));       
+
+       List<User> tmpUserList = new ArrayList<User>();
+       tmpUserList.add(authenticatedUser.getUser());
+       nGroup.setAdmins(tmpUserList);
+
+       Group newGroup = groupRepository.save(nGroup);
+
+       List<Group> tmpGroupList = groupRepository.findUserG(authenticatedUser.getUser().getEmail());
+       tmpGroupList.add(newGroup);
+       authenticatedUser.getUser().setGroups(tmpGroupList);
+
+       userRepository.save(authenticatedUser.getUser());
+
+       for(User user : myMember){
+               List<Group> tempGroupList = groupRepository.findUserG(user.getEmail());
+               tempGroupList.add(newGroup);
+               user.setGroups(tempGroupList);
+               userRepository.save(user);
+       }
+
+       return ResponseEntity.ok(newGroup);
+
    }
+
    
    @PostMapping("/addMember/{id}")//csapathoz adok hozzá
    public ResponseEntity<Group> addMember(@PathVariable int id, @RequestBody User addM){
@@ -112,7 +146,53 @@ public class GroupController {
     
     @GetMapping("/groupss")
     public ResponseEntity<List<Group>> getGroups(){
-        return ResponseEntity.ok(this.authenticatedUser.getUser().getGroups());
+        List<Group> groups = groupRepository.findUserG(this.authenticatedUser.getUser().getEmail());
+        groups.addAll(groupRepository.findAdminG(this.authenticatedUser.getUser().getEmail()));
+        return ResponseEntity.ok(groups);
+    }
+
+    @GetMapping("/admingroup")
+    public ResponseEntity<List<Group>> getAGroups(){
+        List<Group> g = new ArrayList();
+        if(authenticatedUser.getUser().getRole()==User.Role.ADMIN ){
+            g=groupRepository.findAll();
+            
+        }else{
+            g=groupRepository.findAdminG(authenticatedUser.getUser().getEmail());
+        }       
+        return ResponseEntity.ok(g);
+    }
+
+    @PostMapping("/modifyGroup/{id}")
+    public ResponseEntity<?> modifyGroup(@RequestBody newGroupDTO inGroup, @PathVariable int id){
+
+        List<User> myMember= new ArrayList<>();
+        for(String s : inGroup.getUsers()){
+            if(!s.equals(authenticatedUser.getUser().getEmail()) && !inGroup.getAdmins().contains(s)) {
+                myMember.add(userRepository.findByEmail(s).get());
+            }
+        }
+
+        List<User> myAdmin= new ArrayList<>();
+        for(String s : inGroup.getAdmins()){
+                myAdmin.add(userRepository.findByEmail(s).get());
+        }
+
+        Group oldGroup= groupRepository.findById(id).get();
+
+        for(User user : oldGroup.getUsers()){
+            if(!myMember.contains(user)){
+                List<Group> tempGroupList = groupRepository.findUserG(user.getEmail());
+                tempGroupList.remove(oldGroup);
+                userRepository.save(user);
+            }
+        }
+
+        oldGroup.setUsers(myMember);
+        oldGroup.setAdmins(myAdmin);
+
+        return ResponseEntity.ok(groupRepository.save(oldGroup));
+
     }
     
     

@@ -2,5 +2,6 @@ export default {
   users: [],
   groups: [],
   members: [],
-  admins: []
+  admins: [],
+  modGroup: Object
 }

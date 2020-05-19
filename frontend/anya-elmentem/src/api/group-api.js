@@ -10,7 +10,24 @@ export default {
         'Access-Control-Allow-Origin': '*'
       }
     }
-    return axios.post('http://localhost:8080/group/newGroup', groupRequest.memberList, Http)
+    return axios.post('http://localhost:8080/group/newGroup', { users: groupRequest.memberList }, Http)
+  },
+
+  modifyGroup (groupRequest) {
+    console.log('Itt vagyok ebben a csodában')
+    console.log(groupRequest.memberList)
+    console.log(groupRequest.adminList)
+    const Http = {
+      headers: {
+        Authorization: `Basic ${groupRequest.token}`,
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      }
+    }
+    return axios.post(`http://localhost:8080/group/modifyGroup/${groupRequest.id}`, {
+      users: groupRequest.memberList,
+      admins: groupRequest.adminList
+    }, Http)
   },
 
   addMember (memberRequest) {
@@ -91,5 +108,25 @@ export default {
       }
     }
     return axios.get(`http://localhost:8080/group/getMemberList/${listRequest.id}`, Http)
+  },
+  getAGroups (usersRequest) {
+    const Http = {
+      headers: {
+        Authorization: `Basic ${usersRequest.token}`,
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      }
+    }
+    return axios.get('http://localhost:8080/group/admingroup', Http)
+  },
+  getGroups (usersRequest) {
+    const Http = {
+      headers: {
+        Authorization: `Basic ${usersRequest.token}`,
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      }
+    }
+    return axios.get('http://localhost:8080/group/groupss', Http)
   }
 }

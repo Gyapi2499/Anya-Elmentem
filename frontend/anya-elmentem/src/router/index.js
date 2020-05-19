@@ -4,8 +4,13 @@ import home from '../views/home/home.vue'
 import addGroup from '../views/addGroup/addGroup.vue'
 import modGroup from '../views/modGroup/modGroup.vue'
 import newTodo from '../views/newTodo/newTodo.vue'
+import myTodos from '../views/myTodos/myTodos.vue'
+import newMyTodo from '../views/newMyTodo/newMyTodo.vue'
 import Signup from '../views/registration/registration.vue'
 import Login from '../views/login/login.vue'
+import addChange from '../views/add-change/add-change.vue'
+import handleChange from '../views/handle-change/handle-change.vue'
+import groupTodos from '../views/groupTodos/groupTodos.vue'
 
 Vue.use(VueRouter)
 
@@ -14,6 +19,16 @@ const routes = [
     path: '/',
     name: 'Home',
     component: home
+  },
+  {
+    path: '/myTodos',
+    name: 'myTodos',
+    component: myTodos
+  },
+  {
+    path: '/groupTodos',
+    name: 'groupTodos',
+    component: groupTodos
   },
   {
     path: '/about',
@@ -39,6 +54,11 @@ const routes = [
     component: newTodo
   },
   {
+    path: '/newMyTodo',
+    name: 'newMyTodo',
+    component: newMyTodo
+  },
+  {
     path: '/signup',
     name: 'signup',
     components: {
@@ -50,6 +70,20 @@ const routes = [
     name: 'login',
     components: {
       default: Login
+    }
+  },
+  {
+    path: '/addChange',
+    name: 'addChange',
+    components: {
+      default: addChange
+    }
+  },
+  {
+    path: '/handleChange',
+    name: 'handleChange',
+    components: {
+      default: handleChange
     }
   }
 ]

@@ -8,7 +8,7 @@
           <hr class="my-4">
         </div>
 
-        <div v-if="!successfulLogin && tried" class="col-12 title">
+        <div v-if="showError" class="col-12 title">
           <ErrorMessage :message='errMessage' />
         </div>
 
@@ -16,7 +16,7 @@
           <h1>Sikeres bejelentkezés</h1>
         </div>
 
-        <div v-if="!successfulLogin" class="row justify-content-center">
+        <b-form v-if="!successfulLogin" class="row justify-content-center vld-parent" ref="formContainer">
           <b-form-group id="input-group-1" label-for="input-1" class="col-10">
 
             <b-form-input
@@ -45,7 +45,7 @@
             <router-link to="/signup"><b-button variant="secondary">Regisztráció</b-button></router-link>
           </div>
 
-        </div>
+        </b-form>
       </b-jumbotron>
     </div>
   </div>
@@ -66,15 +66,31 @@ export default {
         email: '',
         password: ''
       },
-      tried: false,
-      errMessage: 'Sikertelen bejelentkezés'
+      showError: false,
+      errMessage: 'Sikertelen bejelentkezés',
+      fullPage: false
     }
   },
   methods: {
     ...mapActions(['login']),
     signin () {
+      const loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.formContainer,
+        canCancel: true,
+        onCancel: this.onCancel
+      })
       this.login(this.loginRequest)
-      this.tried = true
+      this.showError = false
+      setTimeout(() => {
+        loader.hide()
+        if (!this.successfulLogin) {
+          this.showError = true
+        }
+      }, 5000)
+    },
+    onCancel () {
+      console.log('User cancelled the loader.')
+      this.showError = true
     }
   },
   computed: {

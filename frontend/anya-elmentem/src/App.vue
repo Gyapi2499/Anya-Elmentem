@@ -1,13 +1,17 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>|
-      <router-link to="/addGroup">Add Group</router-link>|
-      <router-link to="/modGroup">Modify a Group</router-link>|
-      <router-link to="/newTodo">NewTodo</router-link>|
-      <router-link to="/signup">Registration</router-link>|
-      <router-link to="/login">Login</router-link>|
+      <router-link to="/">Naptáram</router-link> |
+      <router-link to="/groupTodos">Csoport naptára</router-link>|
+      <router-link to="/myTodos">Feladataim</router-link>|
+      <router-link to="/addGroup">Csoport hozzáadása</router-link>|
+      <router-link to="/modGroup">Csoport módosítása</router-link>|
+      <router-link to="/newTodo">Új feladat másnak</router-link>|
+      <router-link to="/newMyTodo">Új feladat nekem</router-link>|
+      <router-link to="/addChange">Csere</router-link>|
+      <router-link to="/handleChange">Cserék kezelése</router-link>|
+      <router-link to="/signup">Regisztráció</router-link>|
+      <router-link to="/login">Login</router-link>
       <b-button variant="secondary" @click="doLogout()"><b-icon-box-arrow-in-right></b-icon-box-arrow-in-right></b-button>
     </div>
     <router-view/>
@@ -21,8 +25,10 @@ import router from './router/index.js'
 export default {
   methods: {
     ...mapActions(['logout']),
+    ...mapActions('newTodo', ['nullGroup']),
     doLogout () {
       this.logout()
+      this.nullGroup()
       router.push({ path: '/' })
     }
   }

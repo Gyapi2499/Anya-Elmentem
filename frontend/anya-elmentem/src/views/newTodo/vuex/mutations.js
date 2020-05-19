@@ -4,5 +4,8 @@ export default {
   },
   setGroup (state, group) {
     state.group = group
+  },
+  setNullGroup (state) {
+    state.group = []
   }
 }

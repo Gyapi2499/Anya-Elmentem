@@ -15,7 +15,25 @@ export default {
       chores: todoRequest.chores,
       fromDate: todoRequest.fromDate,
       toDate: todoRequest.toDate,
-      groupId: todoRequest.groupId
+      groupId: todoRequest.groupId,
+      ready: false
+    }, Http)
+  },
+  addto (todoRequest) {
+    const Http = {
+      headers: {
+        Authorization: `Basic ${todoRequest.token}`,
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      }
+    }
+    return axios.post('http://localhost:8080/todo/addto', {
+      userId: todoRequest.userId,
+      chores: todoRequest.chores,
+      fromDate: todoRequest.fromDate,
+      toDate: todoRequest.toDate,
+      groupId: todoRequest.groupId,
+      ready: false
     }, Http)
   },
 

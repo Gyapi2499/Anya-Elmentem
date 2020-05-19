@@ -1,4 +1,7 @@
 export default {
+  setModGroup (state, modGroup) {
+    state.modGroup = modGroup
+  },
   setUsers (state, userList) {
     state.users = userList
   },
