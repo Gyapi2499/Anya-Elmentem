@@ -1,20 +1,16 @@
 language: node_js
 node_js:
- - "node"
-
-cache: npm
-
-before_install: cd frontend/anya-elmentem
-
-install: npm install
-    
-script: npm run build
-
+- "node"
+before_install:
+- cd frontend/anya-elmentem
+install:
+- npm install
+script:
+- npm run build
 deploy:
- provider: pages
- skip_cleanup: true
- github_token: $GITHUB_TOKEN
- local_dir: dist
- on:
-   branch: master
-   
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  local_dir: frontend/anya-elmentem/dist
+  on:
+    branch: master
