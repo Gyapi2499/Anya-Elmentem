@@ -12,7 +12,7 @@
     "bootstrap": "^4.4.1",
     "bootstrap-vue": "^2.10.1",
     "core-js": "^3.6.4",
-    "luxon": "^1.23.0",
+    "luxon": "^2.5.2",
     "vue": "^2.6.11",
     "vue-cal": "^3.2.1",
     "vue-datetime": "^1.0.0-beta.11",
